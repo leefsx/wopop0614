@@ -1,6 +1,5 @@
 <view>
     <!-- <view class='title'>提交订单</view> -->
-
     <view class='detail' wx:for="{{carts}}" wx:key="{{item}}">
         <view class='detail_img'>
           <image mode='aspectFit' src="{{item.feature_img}}"></image>
@@ -15,6 +14,12 @@
           <text class='de3'>￥{{item.price}}</text>
         </view>
     </view>
+    
+    <view class='count'>
+        <view class='count_money'>总价:<text>￥11111</text></view>
+        <view class='count_yun'><text>(含运费:￥11111)</text></view>
+    </view>
+
     <view class='lan'>
       <view class='fx'>
         <view style='flex:2;color:#b5b5b5'><text>取餐时间</text></view>  
@@ -33,7 +38,7 @@
       
       <view class='fx'>
           <view style='flex:2;color:#b5b5b5'><text>买家留言</text></view>  
-          <view style='flex:5'><input bindblur="binkMessageConfirm" type="text" /></view>
+          <view style='flex:5;padding-top:1em'><input bindblur="binkMessageConfirm" type="text" /></view>
       </view>
     </view>
 

@@ -11,6 +11,7 @@
 .fx{
     display: flex;text-align: left;border-bottom: 1px solid #ccc
 }
+
 .fx_title{flex:2;}
 .fx_value{flex:5;color:#9D9D9D}
 .lan view text{  overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;}

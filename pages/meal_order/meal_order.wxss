@@ -1,21 +1,24 @@
 .title{width: 100%;height: 50px;color: #231b19;line-height: 50px;text-align: center}
-.detail{width: 100%;display: flex;background: #f6f6f6}
+.detail{width:94%;display:flex;background:#f6f6f6;border-bottom:1px solid #ccc;margin:0 auto;border-radius:9px;}
 .detail_img{width: 97px;height: 97px;margin-top:12px;margin-left:12px;}
 .detail_img image{width: 100%;height: 97px;}
 .detail_txt{display: flex;flex-direction: column;margin-top: 12px;margin-left: 8px;align-items: flex-start}
 .detail_txt text{margin-top: 5px;}
-.detail_txt .de1{font-size: 1.2em}
-.detail_txt .de2{font-size: 1em;color: #bfbfbf; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;}
-.detail_txt .de3{font-size: 1.2em;color: #ff862c}
-.lan{width: 95%;margin-top: 15px;margin: 0 auto;padding-left: 5px;margin-bottom: 70px;}
+.detail_txt .de1{font-size: 1em}
+.detail_txt .de2{font-size: 0.8em;color: #bfbfbf; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;}
+.detail_txt .de3{font-size: 1em;color: #ff862c}
+.lan{width: 95%;margin-top: 15px;margin: 0 auto;padding-left: 5px;margin-bottom: 70px;font-size: 0.9rem}
 .lan view{padding-top:5px;padding-bottom: 5px; height: 50px;line-height: 50px;width: 100%}
 .fx{display: flex;text-align: left;border-bottom: 1px solid #ccc}
 .lan view text{ overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;}
 .footer{display: flex;width: 100%;height: 50px;line-height: 50px;justify-content: space-around;position: fixed;bottom: 0;}
 .footer-l{flex: 5;background: #231b19;color: #ff862c;padding-left: 20px;}
 .footer-r{flex: 3;background: #ff862c;color: #ffffff;text-align: center}
+.count{margin-top:18px;padding-right:13px;}
 
-
+.count_money,.count_yun{width: 100%;height: 20px;line-height: 20px;text-align: right;padding-right: 5px}
+.count_money text{color: #ff862c;font-size: 0.9rem}
+.count_yun text{color: #ccc;font-size: 0.7rem;}
 .add_j{display:flex;position:absolute;background:#ff862c;right:0rem;border-radius:5px;width:83px;justify-content:space-around;height:60rpx;bottom:10rpx}
 .add_j image{width:38rpx;height:38rpx;margin-top:0.3rem;}
 .add_j text{width: 50px;line-height: 64rpx;text-align: center;}

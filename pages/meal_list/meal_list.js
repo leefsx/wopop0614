@@ -27,9 +27,12 @@ Page({
     // 页面初始化 options为页面跳转所带来的参数
     wx.getSystemInfo({
       success: function (res) {
-        that.data.windowHeight = res.windowHeight
+        that.setData({
+          windowHeight: res.windowHeight
+        })
       }
     })
+
     //-------------------------------------------------------
     this.animation = wx.createAnimation({
       duration: 400,

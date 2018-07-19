@@ -15,6 +15,10 @@
         <view class="tooLong">{{item.title}}</view>
         <view class="">￥{{item.discount_price}} x <text class="color2" style="font-size:26rpx;">{{item.amount}}</text></view>
     </view>
+    
+
+    
+    
     <view class="orders-footer">
         <view style="text-align:right;"><text>金额：</text><text class="cart_color">￥{{order.total_price}}</text></view>
         <view class="orders-btns" wx:if="{{order.status_no==1||order.status_no==2}}">
