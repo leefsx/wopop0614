@@ -35,8 +35,8 @@ Page({
 
     //-------------------------------------------------------
     this.animation = wx.createAnimation({
-      duration: 400,
-      timingFunction: 'ease',
+      duration: 200,
+      timingFunction: 'linear',
       delay: 100,
       transformOrigin: '50% 50%',
       opacity: "1"
@@ -163,7 +163,7 @@ Page({
         timingFunction: "linear",
         delay: 0
       })
-      this.data.animation = animation
+      this.animation = animation
       animation.translateY(300).step()
       this.setData({
         animationData: animation.export(),
