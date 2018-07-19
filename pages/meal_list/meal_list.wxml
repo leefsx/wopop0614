@@ -15,7 +15,7 @@
         </scroll-view>
 <!--右侧栏-->
         <scroll-view scroll-y="true" class="right-side" style='height:{{windowHeight-50}}px'>
-                <view id="{{menu.id}}">
+                <view id="{{menu.id}}" style='padding:4px'>
                     <block wx:for="{{meals}}"  wx:key="id" wx:for-item="dish" >
                         <view class="dish-item">
                             <view class="dish-item-wrp">
@@ -86,7 +86,7 @@
  
 
      <view class='body' hidden="{{flag}}"> 
-        <view class="window"  animation="{{animation}}" style='margin-top:{{windowHeight-(windowHeight/1)}}px'>
+        <view class="window"  animation="{{animation}}">
             <view class='t_title'><text>{{meal.name}}</text></view>
             <view class='select' wx:if="{{specs.length}}" >
               <view class='guige'>规格</view>
