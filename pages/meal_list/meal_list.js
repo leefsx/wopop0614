@@ -210,25 +210,36 @@ Page({
       let that = this
       let data = event.currentTarget.dataset
       let index = data.index
+      let type = data.type
       let meals = this.data.meals
+      let carts = this.data.carts
       let meal = []
       if (meals[index]){
         meal = meals[index]
       }
-      if (this.data.meals[index].count) this.data.meals[index].count += 1
-      else this.data.meals[index].count = 1
+      if (type == 'cart'){
+        meal = carts[index]
+        for (let i in meals) {
+          if (meals[i].id == meal.id) meals[i].count += 1
+        }
+      } else {
+        if (meals[index].count) meals[index].count += 1
+        else meals[index].count = 1
+      }
+      
       this.setData({
-        meals: this.data.meals,
-        meal: meal
+        meals: meals,
+        meal: meal,
+        carts: carts
       })
       let total = this.data.total
-      this.data.specs = []
-      
+      let specs = []
       if (!meal.spec_ids && !meal.ingredients && !meal.taste_ids) {
         this.addCart()
         this.dealCart()
       }else{
-        this.setData({ flag: false, specs: meal.spec, selspec: [], selingred: [], seltaste: [] })
+        if (meal.spec) specs = meal.spec
+        this.setData({ flag: false, specs: specs, selspec: [], selingred: [], seltaste: [] })
       }
     },
     //计算购物车数量、总价
@@ -336,8 +347,9 @@ Page({
       if (meals[index]) {
         meal = meals[index]
       }
+      if (type == 'cart') meal = this.data.carts[index]
       // 这个弹出框只能针对有规格商品的删减提示，不能点减号删减只能在购物车中删减
-      if (meal.spec){
+      if (meal.spec && type!='cart'){
         wx.showModal({
           title: '提示',
           content: '含有规格的商品只能在购物车里删减',
@@ -345,7 +357,14 @@ Page({
         })
       } else {
         let carts = this.data.carts
-        if (meals[index].count) meals[index].count -= 1
+        if (type=='cart'){
+          for (let i in meals){
+            if (meals[i].id == meal.id) meals[i].count -= 1
+          }
+        }else{
+          if (meals[index].count) meals[index].count -= 1
+        }
+        
         for (let i in carts) {
           let product = carts[i]
           if (carts[i].id == meal.id) {
