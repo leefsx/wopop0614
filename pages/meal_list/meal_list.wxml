@@ -39,25 +39,21 @@
                                               </view>
                                               <view class="fl">
                                                   <view class="dish-item-tab">
-                                                      <view hidden="{{!dish.count||dish.count == 0}}" class="dish-item-count-minus" data-id="{{dish.id}}" data-index="{{index}}" data-type="list" bindtap="minusCount">
-
+                                                      <view hidden="{{!dish.count||dish.count == 0}}" class="dish-item-count-minus">
                                                           <view class='add_j'>
-                                                            <view>
+                                                            <view data-id="{{dish.id}}" data-index="{{index}}" data-type="list" bindtap="minusCount">
                                                               <image class="image" src="/pages/meal_list/resources/pic/j.png" /> 
                                                             </view>
                                                             <view>
-                                                              <text>11</text>                                                            
+                                                              <text hidden="{{!dish.count||dish.count == 0}}">{{dish.count}}</text>                                                            
                                                             </view>
-                                                            <view>
+                                                            <view data-id="{{dish.id}}" data-index="{{index}}" data-type="list" bindtap="addCount">
                                                               <image class="image" src="/pages/meal_list/resources/pic/a.png" />
                                                             </view>
                                                           </view>
 
 
                                                       </view>
-                                                  </view>
-                                                  <view class="dish-item-count-text dish-item-tab">
-                                                      <text hidden="{{!dish.count||dish.count == 0}}">{{dish.count}}</text>
                                                   </view>
                                                   <view class="dish-item-count-plus" data-id="{{dish.id}}" data-index="{{index}}" data-type="list" bindtap="addCount">
                                                       <image class="image" src="/pages/meal_list/resources/pic/a.png" />

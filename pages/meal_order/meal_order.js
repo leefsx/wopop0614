@@ -56,11 +56,13 @@ Page({
   submitOrder(e){
     let getime_index = this.data.getime_index
     let shop_id = this.data.shop_id
+    let openid = wx.getStorageSync('openid');
     let orders = {
       getime_type: this.data.getime_type[getime_index],
       message: this.data.message,
       cartsprice: this.data.cartsprice,
       shop_id: shop_id,
+      openid: openid,
       carts: this.data.carts
     }
     app.apiRequest('meal', 'submitOrder', {
@@ -68,9 +70,36 @@ Page({
       success: function (res) {
         if (res.data.result == 'OK') {
           console.log(res.data)
-          wx.navigateTo({
-            url: '../meal_order_list/meal_order_list',
-          })
+          let resdata = res.data
+          let oid = resdata.oid
+          if (resdata.paySign){
+            // toPay
+            wx.requestPayment({
+              "timeStamp": resdata.timeStamp,
+              "nonceStr": resdata.nonceStr,
+              "package": resdata.package,
+              "signType": resdata.signType,
+              "paySign": resdata.paySign,
+              success(res) {
+                wx.navigateTo({ url: '../meal_order_detail/meal_order_detail?oid=' + oid })
+              },
+              fail(res) {
+                wx.showModal({
+                  title: res.errMsg,
+                  content: '', showCancel: false,
+                  //complete() {wx.navigateTo({url: '../meal_order_list/meal_order_list'})}
+                })
+              }
+            })
+          }else{
+            wx.showModal({
+              title: 'prepay_id error',
+              content: '', showCancel: false,
+              complete() { wx.navigateTo({ url: '../meal_order_detail/meal_order_detail?oid=' + oid })}
+            })
+          }
+          
+          
         }
       }
         
