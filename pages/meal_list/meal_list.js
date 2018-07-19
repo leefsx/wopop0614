@@ -306,11 +306,18 @@ Page({
         //有规格产品加入购物车
         if (meal.spec_ids){
           let selspec = this.data.selspec
-          if (selspec) {
+          if (selspec.id) {
             meal.count = 1
             meal.price = selspec.price
             meal.spec_id = { id: selspec.id, name: selspec.name, price: selspec.price }
             carts.push(meal)
+          }else{
+            wx.showModal({
+              title: '请选择规格',
+              content: '',
+              showCancel: false
+            })
+            return false;
           }
         }
         if (meal.ingredients){
