@@ -1,0 +1,101 @@
+<view class="main">
+  <view class="order-status-content cart_bg_color2">
+    <text wx:if="{{order.order_status==4}}">已作废</text>
+    <text wx:elif="{{order.order_status==5}}">已取消</text>
+    <text wx:elif="{{order.pay_status==1}}">待付款</text>
+    <text wx:elif="{{order.pay_status==2 && order.delivery_status==1}}">待发货</text>
+    <text wx:elif="{{order.pay_status==2 && order.delivery_status==2 && order.ori_status!=3}}">待收货</text>
+    <text wx:elif="{{order.pay_status==2 && order.delivery_status==4}}">{{trade_status}}</text>
+    <text wx:elif="{{order.pay_status==3}}">已退款</text>
+    <text wx:elif="{{order.delivery_status==3}}">已退货</text> 
+    <text wx:else>已完成</text>
+  </view>
+  <view class="delivery-box confirm-box medium_font border_bottom2">
+    <view class="delivery-top border_bottom" style="padding-right:0rpx;">
+      <text class="fl">配送方式</text>
+      <text class="fr">{{dis_title.title}}</text>
+    </view>
+    <view class="delivery-top border_bottom" wx:if="{{dis_title.key &&dis_title.key!='0'&&dis_title.key!='1'}}">
+      <text class="fl">配送地址</text>
+    </view> 
+    <view class="delivery-middle" wx:if="{{dis_title.key && dis_title.key!='0'}}" >
+      <view class="delivery_addr-no-content">
+        <view class="delivery_addr-no-list">
+            <image src="../../../image/local.jpg" style="width:50px; height:50px;"></image>
+            <view wx:if="{{dis_title.key==1}}">
+            <view class="addr_detail small_font">自提地址：<view wx:for="{{pickupaddrs}}" wx:key="index">{{item.address}}</view></view>
+            </view>
+            <view wx:else>
+            <view class="addr_name normal_font">收货人：<text class="cart_color">{{address.name}}</text></view>
+            <view class="addr_phone medium_font">电话：{{address.phone}}</view>
+            <view class="addr_detail small_font">地址：{{address.detail}}</view>
+            </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="orders-list confirm-box medium_font border_bottom2">
+    <view class="orders-number color2 border_bottom">订单编号：{{order.oid}}</view>
+    <navigator wx:for="{{product}}" url="../details/details?id={{item.product_id}}" class="orders-detail border_bottom">
+        <image src="{{item.product_thumb}}"></image>
+        <view class="tooLong">{{item.product_name}}</view>
+        <view class="">￥{{item.price}} x <text class="color2" style="font-size:26rpx;">{{item.amount}}</text></view>
+    </navigator>
+    <view class="orders-footer">
+        <view style="text-align:right;"><text>金额：</text><text class="cart_color">￥{{order.total_amount_new}}</text></view>
+        <view  class="color2" style="text-align:right;">(<text>含运费：￥</text><text>{{order.ifee}}</text>)</view>
+        
+        <view class="orders-btns" wx:if="{{order.pay_status==1&&order.order_status!=5&&order.order_status!=4}}">
+          <view class="orders-btn cart_bg_color" data-oid="{{order.oid}}" bindtap="cancelOrders">取消订单</view>
+          <view class="orders-btn cart_bg_color" data-oid="{{order.oid}}" bindtap="payOrders" wx:if="{{cash.paraval.paytype!='0'}}">付款</view>
+        </view>
+        <view class="orders-btns" wx:elif="{{order.pay_status==2 && order.delivery_status==1}}">
+          <view class="orders-btn cart_bg_color" data-oid="{{order.id}}" bindtap="remind">提醒发货</view>
+        </view>
+        <view class="orders-btns" wx:elif="{{order.order_status==5}}">
+          <view class="orders-btn cart_bg_color" data-oid="{{order.oid}}" bindtap="deleteOrderList">删除订单</view>
+        </view>
+        
+        <view class="orders-btns" wx:elif="{{order.pay_status==2 && order.delivery_status==2 && order.ori_status!=3}}">
+          <view class="orders-btn cart_bg_color" data-oid="{{order.id}}" bindtap="confirmOrders">确认收货</view>
+          <view class="orders-btn cart_bg_color" wx:if="{{dis_title.key!='0'}}" data-oid="{{order.id}}" data-orderid="{{order.oid}}" bindtap="viewLogistics">查看物流</view>
+        </view>
+        <view class="orders-btns" wx:elif="{{order.pay_status==2 && order.delivery_status==4}}">
+          <view class="orders-btn cart_bg_color" data-oid="{{order.oid}}" bindtap="rating">我的评价</view>
+        </view>
+        <view class="orders-btns" wx:elif="">
+          <view class="orders-btn cart_bg_color" data-oid="{{order.oid}}" bindtap="buyAgain">再次购买</view>
+        </view>
+    </view>
+  </view>
+
+  
+
+  <view class="confirm-pay confirm-box medium_font border_bottom2" style="border-bottom:none;">
+      <view class="delivery-top border_bottom">
+        <text class="fl">支付方式</text>
+        <view class="picker fr">{{cash.title || '在线支付'}}</view>
+      </view>
+
+    
+    <view class="delivery-top border_bottom coupon-list" >
+      <text class="fl">优惠券</text>
+      <view wx:if="{{disass.yhjprice}}" class="picker fr small_font"><text class="cart_color medium_font">-￥{{disass.yhjprice}}</text></view>   
+      <view wx:else class="picker fr">未使用</view>     
+    </view>
+
+    <view class="delivery-top border_bottom integral-list">
+      <text class="fl">积分</text>
+      <view class="picker fr small_font"><text class="cart_color medium_font">-￥{{disass.jfprice || '0.00'}}</text></view>      
+    </view>
+  </view>
+
+  <view class="confirm-invoice confirm-box medium_font border_bottom2" style="border-bottom:none;">
+    <view class="delivery-top border_bottom">
+      <text class="fl">余额</text>
+      <view class="picker fr small_font"><text class="cart_color medium_font">-￥{{disass.yeprice || '0.00'}}</text></view>
+    </view>
+  </view>
+
+</view>

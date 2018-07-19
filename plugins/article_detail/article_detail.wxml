@@ -1,0 +1,21 @@
+<import src="../../wxParse/wxParse.wxml"/>
+<template name="article_detail">
+<view class="article-detail">
+    <view class="article-detail-container">
+        <view class="detail-content">
+        <block wx:if="{{! detail.errmsg}}">
+          <view class="detail-title" style="{{styles.title}}">{{detail.title}}</view>
+          <view class="detail-info" style="{{styles.info}}">
+            <text class="span" wx:if="{{param.display.author}}"><text class="iconfont icon-zuozhezhongxin"></text>{{detail.author}}</text>
+            <text class="span" wx:if="{{param.display.views}}"><text class="iconfont icon-weibiaoti-ss"></text>{{detail.v_num}}</text>
+            <text class="span" wx:if="{{param.display.date}}"><text class="iconfont icon-cloud-time"></text>{{detail.publish_time}}</text>
+          </view>
+          <view class="detail-detail" style="{{styles.detail}}">
+		  <template is="wxParse" data="{{wxParseData: artdetail.nodes}}"/>
+		  </view>
+        </block>
+        <block wx:else>{{detail.errmsg}}</block>
+        </view>
+    </view>
+</view>
+</template>

@@ -1,0 +1,12 @@
+<view class="recharge">
+  <form bindsubmit="doRecharge">
+	<view class="inpbox">
+	  <text class="title">金额</text>
+	  <input type="digit" name="amount" placeholder="请输入充值的金额" focus="{{focus}}" />
+	</view>
+	<button class="btnsubmit" form-type="submit" style="background-color:{{btncolor}};">确定</button>
+  </form>
+  <view class="btnlist">
+	<navigator hover-class="none" url="../recharge_list/recharge_list">查看明细</navigator>
+  </view>
+</view>

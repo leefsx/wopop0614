@@ -1,0 +1,5 @@
+<template name="form_submit">
+  <view class="wp_content form_submit_content">
+	<button formType="submit" plain="true" class="wxbtn" hover-class="btnhover" style="{{inner_style}}" data-tips="{{param.submit_tips}}">{{param.btnval}}</button>
+  </view>
+</template>

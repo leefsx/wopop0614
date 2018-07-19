@@ -1,0 +1,50 @@
+<!--pages/mydis_cashout/mydis_cashout.wxml-->
+<view class="main">
+  <form bindsubmit="submitApply" report-submit="true">
+      <view class='head'>
+        <navigator class="dis_accounts" url='../mydis_add_account/mydis_add_account'>
+            <view class='image'><image src='../../common/icon_add.png'></image></view>
+            <view class='text'><text>添加提现账户</text></view>
+        </navigator>
+      </view>
+
+      <view wx:if="{{accounts}}" class='select'>
+        <picker bindchange="accountsChange" value="{{aindex}}" range="{{accounts}}">
+          <view class="picker">
+            当前选择：{{accounts[aindex]}}
+          </view>
+        </picker>
+      </view>
+
+      <view class="dis_content">
+        <view class='text'><text>{{datas.mindesc}}</text></view>
+
+
+        <view class='dis_slider'>
+          <view class='money'>
+            <text>{{datas.minval}}</text>
+            <text>{{datas.remaining}}</text>
+          </view>
+          <view class='slider'>
+             <slider name="slider-value" min="{{datas.minval}}" max="{{datas.remaining}}" step='1' value="{{apply.value}}" bindchanging="sliderChange"></slider>
+          </view>
+        </view>
+
+
+        <view class='dis_apply_value'>
+          <image src='../../common/withdrawinput01.png'></image>
+          <input name="input-value" type="number" value="{{apply.value}}" maxlength='7' bindconfirm="changeValue" bindblur="changeValue" confirm-type="done"></input>
+        </view>
+
+        <view class='dis'>
+          <image src='../../common/withdrawinput02.jpg'></image>
+          <input name="note-value" placeholder='备注信息' value="{{apply.note}}" ></input>
+        </view>
+
+
+         <view class='dis_submit'>
+            <button formType="submit">提交</button>
+        </view> 
+      </view>
+  </form>
+</view>

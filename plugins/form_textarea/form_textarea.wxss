@@ -1,0 +1,2 @@
+.form_textarea_content {display:flex;}
+.wxtext {background-image:none;border:2rpx solid #d7dde4;cursor:text;}

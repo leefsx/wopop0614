@@ -1,0 +1,5 @@
+@import '../../plugins/product_detail/product_detail.wxss';
+#layer177601FB5BE16EA0A38AE36444CEC8EB .btnhover{background-color:#ff0000 !important;}
+#layer177601FB5BE16EA0A38AE36444CEC8EB .btnhover{background-color:#ff00ff !important;}
+#layer177601FB5BE16EA0A38AE36444CEC8EB{height:auto;background-image:none;background-color:transparent;background-repeat:repeat;background-position:top left;border-color:transparent;border-style:none;border-width:0rpx;border-radius:0rpx;}
+page{background-image:none;background-color:transparent;background-repeat:repeat;background-position:top left;}

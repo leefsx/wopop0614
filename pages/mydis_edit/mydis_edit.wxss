@@ -1,0 +1,12 @@
+.input input{width: 90%; border: 1px solid #e1e1e1; background: #f7f7f7;padding-top: 2%;padding-bottom: 2%;line-height: 1.8em;
+    font-size: 1.25em;text-align: left; margin: 0 auto; color: #535353;}
+.textarea textarea{width: 90%; border: 1px solid #e1e1e1; background: #f7f7f7;padding-top: 2%;padding-bottom: 2%;line-height: 1.8em;
+    font-size: 1.25em;text-align: left; margin: 0 auto; color: #535353;height: 100px;margin-top: 15px;}    
+
+.main{margin-top: 25px}
+.footer{position: fixed;bottom: 0px;background: #ffffff;display: flex;justify-content: center;margin: 0 auto;width: 100%;height: 50px;border-top:1px solid #f7f7f7;}
+.sections{margin-bottom: 75px;margin-top: 15px;background-color:#f7f7f7;border-bottom:1px solid #f7f7f7;}
+.footer text{width: 30%;height: 50px;line-height: 50px;padding-left: 5px;padding-right: 5px}
+.footer .center text{border-left:1px solid #cccccc;border-right:1px solid #cccccc}
+.submit{width: 90%;margin: 0 auto;background: none; border: none; background: #149eff;color: #FFF;font-size: 1em;border-radius: 4px;-moz-border-radius: 4px;
+    -weblik-border-radius: 4px;letter-spacing: 3px;cursor: pointer;margin-top: 5%;-webkit-appearance: none;text-align: center;height: 90rpx;}

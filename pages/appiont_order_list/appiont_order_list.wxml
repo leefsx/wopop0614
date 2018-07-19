@@ -1,0 +1,58 @@
+<import src="../../common/package/prompt.wxml"/>
+<view class="main">
+    <!-- <view class="my-list">我的订单</view> -->
+    <view class="my-list-nav medium_font">
+        <view bindtap="changActive" data-id="all" class="{{activeIndex == 'all' ? 'active':''}}">全部</view>
+        <view bindtap="changActive" data-id="nopay" class="{{activeIndex == 'nopay' ? 'active':''}}">待付款</view>
+        <view bindtap="changActive" data-id="forService" class="{{activeIndex == 'forService' ? 'active':''}}">待服务</view>
+        <view bindtap="changActive" data-id="refused" class="{{activeIndex == 'refused' ? 'active':''}}">已拒单</view>
+        <view bindtap="changActive" data-id="rating" class="{{activeIndex == 'rating' ? 'active':''}}">待评价</view>
+    </view>
+
+    <view class="orders-box">
+        <template is="prompt" data="{{ prompt }}"/>
+        <view class="orders-list" wx:for="{{orders}}" wx:key="index">
+            <view class="orders-number color2">
+              <text>订单编号：{{item.out_trade_no}}</text>
+            </view>
+            <navigator url="../appiont_order_detail/appiont_order_detail?oid={{item.id}}" class="orders-detail">
+                <image src="{{item.thumbnail}}"></image>
+                <view class="tooLong2" style="line-height: 40rpx;padding-right:70rpx;">{{item.title}}</view>
+                <view class="" style="position: absolute;left: 170rpx;bottom: 0;line-height: 60rpx;">￥{{item.discount_price}}/{{item.service_time}}分钟</view>
+                <text wx:if="{{item.status_str}}" class="orders-status cart_color">{{item.status_str}}</text>
+                <text wx:else class="orders-status cart_color">已完成</text>
+            </navigator>
+            <view class="orders-footer">
+                <view class="orders-btns" wx:if="{{item.status_no==1||item.status_no==2}}">
+                  <view class="orders-btn cart_bg_color" data-oid="{{item.id}}" bindtap="cancelOrders">取消订单</view>
+                  <view class="orders-btn cart_bg_color" data-oid="{{item.id}}" bindtap="payOrders" wx:if="{{item.status_no == '1'}}" data-index="{{index}}">付款</view>
+                </view>
+                <view class="orders-btns" wx:elif="{{item.status_no==4}}">
+                  <view class="orders-btn cart_bg_color" data-oid="{{item.id}}" data-index="{{index}}" bindtap="deleteOrderList">删除订单</view>
+                </view>
+                
+                <view class="orders-btns" wx:elif="{{item.status_no==7}}">
+                  <view class="orders-btn cart_bg_color" data-oid="{{item.id}}" data-index="{{index}}" bindtap="confirmOrders">确认完成</view>
+                </view>
+                <!--view class="orders-btns" wx:elif="{{item.status_no==8||item.status_no==9}}">
+                  <view class="orders-btn cart_bg_color" data-oid="{{item.id}}" data-index="{{index}}" bindtap="confirmOrders">我的评价</view>
+                </view-->
+				<view class="orders-btns" wx:elif="{{item.status_no=='3'||item.status_no=='8'}}">
+                  <view class="orders-btn cart_bg_color">
+				    <navigator url="../appoint_ratings/appoint_ratings?img={{item.thumbnail}}&oid={{item.id}}&id={{item.aid}}">评价</navigator>
+                  </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{showBar}}">
+	<view style="height:110rpx;"></view>
+	<view class="tabBar" style="color:{{tabs.color}};border-color:{{tabs.borderStyle}};background-color:{{tabs.backgroundColor}};border-top-color:{{tabs.borderTopColor}};">
+	  <view wx:for="{{tabs.list}}" wx:key="{{index}}" class="barList" style="color:{{pageid == item.pagePath ? tabs.selectedColor : tabs.color}}">
+		<view class="barList-content" bindtap="switchTab" data-url="{{item.pagePath}}">
+		  <image class="icon" src="{{pageid == item.pagePath ? item.selectedIconPath : item.iconPath}}"></image>
+		  <view>{{item.text}}</view>
+		</view>
+	  </view>
+	</view></block>
+</view>

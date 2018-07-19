@@ -1,0 +1,9 @@
+<template name="form_selector">
+  <view class="wp_content form_selector_content">
+	<picker name="{{layerid}}" bindchange="{{pickerChange}}" value="{{index}}" range="{{options}}" value="{{_value_}}" style="{{inner_style}}margin-right:{{param.required?'20rpx':0}};">
+      <view class="picker" style="{{picker_style}}">{{options[_value_]?options[_value_]:param.title}}</view>
+	</picker>
+	<text wx:if="{{param.required}}" class="required">*</text>
+	<icon wx:if="{{haswarn}}" class="warn" type="warn" size="20" style="top:calc(50% - 20rpx);right:4rpx;" />
+  </view>
+</template>

@@ -1,0 +1,5 @@
+<template name="title">
+<view class="wp_content title_content">
+      <text bindtap="viewtap" data-layerid="{{layerid}}" decode="{{true}}">{{richtext}}</text>
+</view>
+</template>

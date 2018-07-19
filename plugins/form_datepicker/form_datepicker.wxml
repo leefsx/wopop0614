@@ -1,0 +1,9 @@
+<template name="form_datepicker">
+  <view class="wp_content form_datepicker_content">
+	<picker mode="{{param.inptype}}" bindchange="{{timeChange}}" style="margin-right:{{param.required?'6rpx':0}};">
+      <input bindinput="{{onInput}}" bindblur="{{onBlur}}" name="{{layerid}}" type="text" value="{{_value_}}" class="wxinp" placeholder="{{param.inpval}}" placeholder-style="color:{{param.inner_style.color}};text-decoration:{{param.inner_style['text-decoration']}};" style="{{inner_style}}" disabled="true" />
+	</picker>
+	<text wx:if="{{param.required}}" class="required">*</text>
+	<icon wx:if="{{haswarn}}" class="warn" type="warn" size="20" style="top:calc(50% - 26rpx);right:4rpx;" />
+  </view>
+</template>

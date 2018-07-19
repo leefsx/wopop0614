@@ -1,0 +1,45 @@
+.title{width: 100%;height: 200rpx;color: #ffffff;line-height:200rpx;text-align: left;background-color: #ff862c;padding-left:40rpx}
+.detail{width: 100%;display: flex;border-bottom:1rpx solid #e9e9e9;padding: 10px}
+.detail_img{width: 97px;height: 97px;border:1rpx solid #e9e9e9;}
+.detail_img image{width: 100%;height: 97px;}
+.detail_txt{display: flex;flex-direction: column;margin-top: 12px;margin-left: 20px;align-items: flex-start;font-size: 28rpx;max-width: 60%;}
+.detail_txt .de1{color: #9D9D9D; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;}
+.detail_txt .de2{color: #9D9D9D; overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;}
+.detail_txt .de3{color: #ff862c}
+.lan{width: 95%;margin-top: 15px;margin: 0 auto;padding-left: 5px;margin-bottom: 25px}
+.lan view{padding-top:5px;padding-bottom: 5px; height: 50px;line-height: 50px;width: 100%}
+.fx{
+    display: flex;text-align: left;border-bottom: 1px solid #ccc
+}
+.fx_title{flex:2;}
+.fx_value{flex:5;color:#9D9D9D}
+.lan view text{  overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;}
+.c{width:10em;height:10em;margin:0 auto;margin-bottom:75px}
+ .cicle{width: 100%;height:100%;border-radius: 50%;background: #ff862c;color: #ffffff;
+ display: flex;flex-direction: column;align-items:center;text-align: center}
+.cicle_n{height: 4em;width: 100%;line-height: 4em;font-size:1em;color: #ffbb7e}
+.cicle_a{width:100%;color:#ffffff;font-size:2em;} 
+.count_money{height:40px;line-height:40px;text-align: right;padding-right: 5px;font-size: 40rpx;margin-right: 5px;}
+.count_money text{color: #ff862c;}
+.pro_list{border-bottom:20rpx solid #e9e9e9;}
+.shop_name{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:1;
+  -webkit-box-orient:vertical;
+}
+.shop_addr{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:1;
+  -webkit-box-orient:vertical;
+  color: #9D9D9D;
+}
+.shop_info{
+  border-bottom:1rpx solid #e9e9e9;
+  border-top:1rpx solid #e9e9e9;
+  padding: 10px;
+}
+

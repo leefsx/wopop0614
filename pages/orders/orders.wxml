@@ -1,0 +1,77 @@
+<import src="../../common/package/prompt.wxml"/>
+
+
+<view class="main">
+    <!-- <view class="my-list">我的订单</view> -->
+    <view class="my-list-nav medium_font">
+        <view bindtap="changActive" data-id="all" class="{{activeIndex == 'all' ? 'active':''}}">全部</view>
+        <!-- <view bindtap="changActive" data-id="hadpay" class="{{activeIndex == 'hadpay' ? 'active':''}}">已完成</view> -->
+        <view bindtap="changActive" data-id="nopay" class="{{activeIndex == 'nopay' ? 'active':''}}">待付款</view>
+        <view bindtap="changActive" data-id="delivery" class="{{activeIndex == 'delivery' ? 'active':''}}">待发货</view>
+        <view bindtap="changActive" data-id="getit" class="{{activeIndex == 'getit' ? 'active':''}}">待收货</view>
+        <view bindtap="changActive" data-id="rating" class="{{activeIndex == 'rating' ? 'active':''}}">待评价</view>
+    </view>
+
+    <view class="orders-box">
+        <template is="prompt" data="{{ prompt }}"/>
+        <view class="orders-list" wx:for="{{orders}}" wx:key="index">
+            <view class="orders-number color2">
+              <text>订单编号：{{item.oid}}</text>
+              <!-- <image src="/image/iconfont-cancel.png" data-id="{{item.oid}}" data-index="{{index}}" bindtap='deleteOrderList'></image> -->
+            </view>
+            <navigator url="../order_detail/order_detail?oid={{item.oid}}" class="orders-detail">
+                <image src="{{order_pro_rel[item.id][0].picurl}}"></image>
+                <view class="tooLong2" style="line-height: 40rpx;padding-right:70rpx;">{{order_pro_rel[item.id][0].product_name}}</view>
+                <view class="" style="position: absolute;left: 170rpx;bottom: 0;line-height: 60rpx;">{{order_pro_rel[item.id][0].amount}}</view>
+                <text wx:if="{{item.ori_status==5}}" class="orders-status cart_color">已取消</text>
+                <text wx:elif="{{item.ori_status==4}}" class="orders-status cart_color">已作废</text>
+                <text wx:elif="{{item.order_status_no==1}}" class="orders-status cart_color">待付款</text>
+                
+                <text wx:elif="{{item.order_status_no==2 && item.delivery_status_no==1}}" class="orders-status cart_color">待发货</text>
+                <text wx:elif="{{item.order_status_no==2 && item.delivery_status_no==2 && item.ori_status!=3}}" class="orders-status cart_color">待收货</text>
+                <text wx:elif="{{item.order_status_no==2 && item.delivery_status_no==2 && item.ori_status==3}}" class="orders-status cart_color">待评价</text>
+                <text wx:elif="{{item.ori_status==3}}" class="orders-status cart_color">已完成</text>
+
+                 <text wx:elif="{{item.pay_status==3}}" class="orders-status cart_color">已退款</text>
+                <text wx:elif="{{item.delivery_status_no==3}}" class="orders-status cart_color">已退货</text> 
+            </navigator>
+            <view class="orders-footer">
+
+                <view style="text-align:right;"><text>金额：</text><text class="cart_color">￥{{item.total_amount}}</text></view>
+                <view  class="color2" style="text-align:right;">(<text>含运费：</text><text>￥{{item.ifee}}</text>)</view>
+                
+                <view class="orders-btns" wx:if="{{item.order_status_no==1&&item.ori_status!=5&&item.ori_status!=4}}">
+                  <view class="orders-btn cart_bg_color" data-oid="{{item.oid}}" bindtap="cancelOrders">取消订单</view>
+                  <view class="orders-btn cart_bg_color" data-oid="{{item.oid}}" bindtap="payOrders" data-paytype="{{item.paytype}}" wx:if="{{item.paytype != '0'}}" data-index="{{index}}">付款</view>
+                </view>
+                <view class="orders-btns" wx:elif="{{item.order_status_no==2 && item.delivery_status_no==1}}">
+                  <view class="orders-btn cart_bg_color" data-oid="{{item.id}}" bindtap="remind">提醒发货</view>
+                </view>
+                <view class="orders-btns" wx:elif="{{item.ori_status==5}}">
+                  <view class="orders-btn cart_bg_color" data-oid="{{item.oid}}" data-index="{{index}}" bindtap="deleteOrderList">删除订单</view>
+                </view>
+                
+                <view class="orders-btns" wx:elif="{{item.ori_status==2 && item.delivery_status_no==2 && item.ori_status!=3}}">
+                  <view class="orders-btn cart_bg_color" data-oid="{{item.id}}" data-index="{{index}}" bindtap="confirmOrders">确认收货</view>
+                  <view class="orders-btn cart_bg_color" wx:if="{{item.delivery_key!='0'}}" data-oid="{{item.id}}" data-orderid="{{item.oid}}" bindtap="viewLogistics">查看物流</view>
+                </view>
+                <view class="orders-btns" wx:elif="{{item.ori_status==2 && item.delivery_status_no==4}}">
+                  <view class="orders-btn cart_bg_color" data-oid="{{item.oid}}" bindtap="rating">我的评价</view>
+                </view>
+                <view class="orders-btns" wx:elif="">
+                  <view class="orders-btn cart_bg_color" data-oid="{{item.oid}}" bindtap="buyAgain">再次购买</view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{showBar}}">
+	<view style="height:110rpx;"></view>
+	<view class="tabBar" style="color:{{tabs.color}};border-color:{{tabs.borderStyle}};background-color:{{tabs.backgroundColor}};border-top-color:{{tabs.borderTopColor}};">
+	  <view wx:for="{{tabs.list}}" wx:key="{{index}}" class="barList" style="color:{{pageid == item.pagePath ? tabs.selectedColor : tabs.color}}">
+		<view class="barList-content" bindtap="switchTab" data-url="{{item.pagePath}}">
+		  <image class="icon" src="{{pageid == item.pagePath ? item.selectedIconPath : item.iconPath}}"></image>
+		  <view>{{item.text}}</view>
+		</view>
+	  </view>
+	</view></block>
+</view>

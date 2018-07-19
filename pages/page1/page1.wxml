@@ -1,0 +1,74 @@
+<import src='../../plugins/form_input/form_input.wxml' />
+<import src='../../plugins/media/media.wxml' />
+<import src='../../plugins/form_datepicker/form_datepicker.wxml' />
+<import src='../../plugins/title/title.wxml' />
+<import src='../../plugins/navigation/navigation.wxml' />
+<import src='../../plugins/form_options/form_options.wxml' />
+<import src='../../plugins/form_selector/form_selector.wxml' />
+<import src='../../plugins/form_textarea/form_textarea.wxml' />
+<import src='../../plugins/category/category.wxml' />
+<import src='../../plugins/form_submit/form_submit.wxml' />
+
+<view id="scroll_container" style="background-image:none;background-color:transparent;background-repeat:repeat;background-position:top left;">
+	<view id="layer767CE2624BDB9EFD4C1358D71ACBB373" class="mod_wrapper">
+		<template is="title" data="{{ ...layer767CE2624BDB9EFD4C1358D71ACBB373}}"/>
+	</view>
+<view data-layerid='layer1959624D48943AFD7E739F52218810AB' id='layer1959624D48943AFD7E739F52218810AB' class='mod_wrapper freelayout'>
+	<view id="layer6C3ED3FA9D04560438CC39E49A95A442" class="mod_wrapper">
+		<template is="media" data="{{ ...layer6C3ED3FA9D04560438CC39E49A95A442}}"/>
+	</view>
+	<view id="layer74FDF35E63D966B5D3C8AC80A57100A6" class="mod_wrapper">
+		<template is="title" data="{{ ...layer74FDF35E63D966B5D3C8AC80A57100A6}}"/>
+	</view>
+	<view id="layer0B0678D48780E949451EE2FEA692BD59" class="mod_wrapper">
+		<template is="title" data="{{ ...layer0B0678D48780E949451EE2FEA692BD59}}"/>
+	</view>
+	<view id="layer61450DF1D0356B703B55D05E1621CA7E" class="mod_wrapper">
+		<template is="title" data="{{ ...layer61450DF1D0356B703B55D05E1621CA7E}}"/>
+	</view>
+	<view id="layerDA5C0035D91A5EA956913EFC96A57701" class="mod_wrapper">
+		<template is="navigation" data="{{ ...layerDA5C0035D91A5EA956913EFC96A57701}}"/>
+	</view>
+</view>
+	<view id="layer9236F5DBB5F0729B0AEAD8D5EEFDC620" class="mod_wrapper">
+		<template is="title" data="{{ ...layer9236F5DBB5F0729B0AEAD8D5EEFDC620}}"/>
+	</view>
+	<view id="layerF3019CE326BA2863A3B353FED428DBA7" class="mod_wrapper">
+		<template is="category" data="{{ ...layerF3019CE326BA2863A3B353FED428DBA7}}"/>
+	</view>
+<view data-layerid='layer153DEEF79731F029761330E123C56486' id='layer153DEEF79731F029761330E123C56486' class='mod_wrapper form'>
+<form data-id="1528880568025lnv" bindsubmit="formSubmit" style="display:block;padding-bottom:10rpx;overflow:hidden;" report-submit="true">
+	<view id="layer8DA6584773CB219645C0688B2E25F89A" class="mod_wrapper">
+		<template is="form_input" data="{{ ...layer8DA6584773CB219645C0688B2E25F89A}}"/>
+	</view>
+	<view id="layerB4829A958AE5080239E0903255E05FB1" class="mod_wrapper">
+		<template is="form_datepicker" data="{{ ...layerB4829A958AE5080239E0903255E05FB1}}"/>
+	</view>
+	<view id="layer773F9D059DEE044C5F56CE0CC2B2FA5C" class="mod_wrapper">
+		<template is="form_input" data="{{ ...layer773F9D059DEE044C5F56CE0CC2B2FA5C}}"/>
+	</view>
+	<view id="layerD93D5CA5741F3BDA1F62047710BEC968" class="mod_wrapper">
+		<template is="form_options" data="{{ ...layerD93D5CA5741F3BDA1F62047710BEC968}}"/>
+	</view>
+	<view id="layerA07BC4366CB316151731E24F0B6E3D09" class="mod_wrapper">
+		<template is="form_selector" data="{{ ...layerA07BC4366CB316151731E24F0B6E3D09}}"/>
+	</view>
+	<view id="layer4B3CACC04CD0F7A3DE707375E3D5B09C" class="mod_wrapper">
+		<template is="form_textarea" data="{{ ...layer4B3CACC04CD0F7A3DE707375E3D5B09C}}"/>
+	</view>
+	<view id="layer70AEFF248897E9C6AF219D3B88B4090D" class="mod_wrapper">
+		<template is="form_submit" data="{{ ...layer70AEFF248897E9C6AF219D3B88B4090D}}"/>
+	</view>
+</form>
+</view>
+	<block wx:if="{{showBar}}">
+	<view style="height:100rpx;"></view>
+	<view class="tabBar {{tabs.isIphoneX?'isIphoneX':''}}" style="color:{{tabs.color}};border-color:{{tabs.borderStyle}};background-color:{{tabs.backgroundColor}};border-top-color:{{tabs.borderTopColor}};">
+	  <view wx:for="{{tabs.list}}" wx:key="{{index}}" class="barList" style="color:{{pageid == item.pagePath ? tabs.selectedColor : tabs.color}}">
+		<view class="barList-content" bindtap="switchTab" data-url="{{item.pagePath}}">
+		  <image class="icon" src="{{pageid == item.pagePath ? item.selectedIconPath : item.iconPath}}"></image>
+		  <view>{{item.text}}</view>
+		</view>
+	  </view>
+	</view></block></view>
+

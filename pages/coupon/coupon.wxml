@@ -1,0 +1,29 @@
+<import src="../../common/package/prompt.wxml"/>
+<view class="coupon">
+  <!-- <view class="coupon-title">优惠券</view> -->
+  <view class="coupon-nav medium_font">
+      <view bindtap="changActive" data-id="all" class="{{activeIndex == 'all' ? 'active':''}}">领券中心</view>
+      <view bindtap="changActive" data-id="nouse" class="{{activeIndex == 'nouse' ? 'active':''}}">未使用</view>
+      <view bindtap="changActive" data-id="overdue" class="{{activeIndex == 'overdue' ? 'active':''}}">已过期</view>
+      <view bindtap="changActive" data-id="hasuse" class="{{activeIndex == 'hasuse' ? 'active':''}}">使用记录</view>
+  </view>
+  <view class="coupon-box">
+    <template is="prompt" data="{{ prompt }}"/>
+    <view wx:for="{{coupons}}" class="coupon-list">
+      <view class="coupon-list-left {{activeIndex != 'overdue'&& activeIndex != 'hasuse' ? 'cart_bg_color':'sub_color'}}">
+        <view>￥{{item.money}}</view>
+        <view>满￥{{item.full}}可用</view>
+      </view>
+      <view class="coupon-list-right {{activeIndex != 'overdue'&& activeIndex != 'hasuse' ? '':'sub_color'}}">
+        <view class="coupon-list-title">{{item.name}}</view>         
+        <view class="coupon-list-deadline">有效期至：{{item.expire_time}}</view>
+		<view wx:if="{{item.range_type>0}}" class="coupon-list-deadline">{{item.range_catedet}}</view>
+        <view class="coupon-status all cart_bg_color" data-id="{{item.id}}" wx:if="{{item.receive_num > 0 && item.receive_num > item.take_num && activeIndex =='all'}}" bindtap="get_coupons" >立即领取</view>
+        <view class="coupon-status" wx:elif="{{activeIndex =='all'}}">已领取({{item.take_num}})</view>
+        <view class="coupon-status overdue" wx:elif="{{activeIndex =='overdue'}}">已过期</view>
+        <view class="coupon-status" wx:elif="{{item.take_num > 0 && activeIndex =='nouse'}}">未使用</view>
+        <view class="coupon-status" wx:elif="{{activeIndex =='hasuse'}}">已使用</view>
+      </view>
+    </view>
+  </view>
+</view>

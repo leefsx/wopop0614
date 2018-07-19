@@ -1,0 +1,5 @@
+<template name="form_textarea">
+  <view class="wp_content form_textarea_content" style="{{box_align}}">
+	<textarea name="{{layerid}}" bindinput="{{onInput}}" value="{{_value_}}" class="wxtext" placeholder="{{param.inpval}}" placeholder-style="{{placeholder_style}}" style="{{inner_style}}" />
+  </view>
+</template>

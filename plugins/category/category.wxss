@@ -1,0 +1,22 @@
+.category{
+  width: 100%;
+  font-size: 24rpx;
+  background-color: #eee;
+}
+.category scroll-view{
+  width: 100%;
+  white-space: nowrap;
+  overflow: scroll;
+}
+.scroll-item{
+  display: inline-block;
+  margin: 0 15px;
+  border-bottom: 2px solid transparent;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+.scroll-item.active{
+  color: #88bd79;
+  border-color: #88bd79;
+}

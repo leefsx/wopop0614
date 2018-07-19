@@ -1,0 +1,82 @@
+<view class="bg">
+  
+  <view class='header'>
+    <view class='header-l'>
+      <view class='header-l-img'><image src='{{appoitinfo.thumbnail}}'></image></view>
+      <view class='header-l-title'>
+        <view class='header-l-title-t'>{{appoitinfo.title}}</view>
+        <view class='header-l-title-b'><text>{{appoitinfo.relprice}}</text> / {{appoitinfo.service_hours}}分钟</view>
+      </view>
+    </view>
+    <view class='header-r'>
+        <view><text>人数：{{appoitinfo.min_total}} - {{appoitinfo.max_total}}</text></view>
+    </view>
+  </view>
+  
+  <view class='ul'>
+      <view class='li' wx:if="{{clerk.length}}">
+        <view>服务人员</view>
+        <view>{{clerk}}</view>
+      </view>
+      <view class='li'>
+        <view>预订时间</view>
+        <view>{{service_time}}</view>
+      </view>
+      <view class='li' wx:if="{{payment.length}}">
+        <view>支付方式</view>
+        <view>{{payment}}</view>
+      </view>
+  </view>
+  <view class='ul-textarea'>
+      <view class="li{{(index=='message'||index=='address')?'-textarea':''}}" wx:for="{{userinfo}}" wx:key="index">
+        <view>{{item.alias}} <text wx:if="{{item.required=='true'}}" style="color:#f00;">*</text></view>
+		<block wx:if="{{index == 'name'}}">
+			<input type='text' placeholder="请填写您的姓名" placeholder-class="input-style" id="name" class="{{item.error?'error':''}}" bindinput="onInput" />
+		</block>
+		<block wx:elif="{{index == 'sex'}}">
+			<radio-group class="radio-box{{item.error?' error':''}}" id="sex" bindchange="onInput">
+				<label><radio value="male" /> 先生</label>
+				<label><radio value="female" /> 女士</label>
+			</radio-group>
+		</block>
+		<block wx:elif="{{index == 'age'}}">
+			<input type='number' placeholder="请填写您的年龄" placeholder-class="input-style" id="age" class="{{item.error?'error':''}}" bindinput="onInput" />
+		</block>
+		<block wx:elif="{{index == 'id'}}">
+			<input type='idcard' placeholder="请填写您的身份证号码" placeholder-class="input-style" id="id" class="{{item.error?'error':''}}" bindinput="onInput" />
+		</block>
+		<block wx:elif="{{index == 'phone'}}">
+			<input type='number' placeholder="请准确填写手机号码，以便商家联系" placeholder-class="input-style" id="phone" class="{{item.error?'error':''}}" bindinput="onInput" />
+		</block>
+		<block wx:elif="{{index == 'address'}}">
+			<view style="flex:3;">
+				<picker mode="region" bindchange="regionChange" value="{{region}}" style="width:100%;">
+					<view class="picker">
+					  {{region[0]}}，{{region[1]}}，{{region[2]}}
+					</view>
+				</picker>
+				<input type='number' placeholder="填写地址" placeholder-class="input-style" id="address" class="{{item.error?'error':''}}" bindinput="onInput" />
+			</view>
+		</block>
+		<block wx:elif="{{index == 'message'}}">
+			<textarea placeholder="填写留言内容" placeholder-class="input-style" id="message" class="{{item.error?'error':''}}" bindinput="onInput" />
+		</block>
+      </view>
+  </view>
+  <view style="height:200rpx;width:100%;"></view>
+  <view class='cur'>
+    <text>退订时间：{{appoitinfo.unsubscribe_date}}前可退订，逾期不可退款</text>
+  </view>
+
+  <view class='footer'>
+     <view class='footer-index'>
+        合计:<text>¥{{appoitinfo.relprice}}</text>
+     </view>
+     <view class='footer-btn'>
+       <form bindsubmit="onSubmit" report-submit="true">
+        <button formType="submit">提交</button>
+       </form>
+     </view>
+  </view>
+
+</view>

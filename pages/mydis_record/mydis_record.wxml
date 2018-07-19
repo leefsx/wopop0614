@@ -1,0 +1,21 @@
+<view class="main">
+   <view class="deal-infos">
+    <view>累计提现：{{dealinfos.sum}}，共{{dealinfos.count}}次</view>
+  </view> 
+
+   <view class="record-list">
+    <view class="list" wx:for="{{datas}}" wx:key="index">
+      <view class="time">{{item.start_time}}</view>
+      <view class='time_styl'>
+        <view class="atype">{{item.atype}}</view>
+        <view class="status">{{item.hadcash==0?'申请中':''}}</view>
+      </view>
+      <view class="money">￥{{item.hadcash==0?item.apply_amount:item.money}}</view>
+    </view>
+    
+    <view class="loadmore" wx:if="{{morebutton}}" bindtap="loadmore">加载更多</view>
+  </view> 
+
+
+</view>
+

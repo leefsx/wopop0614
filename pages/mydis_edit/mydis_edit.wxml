@@ -1,0 +1,7 @@
+<view class="main">
+  <form bindsubmit="submitEdit" report-submit="true">
+    <view class='input'><input name="name" placeholder="店铺名称" value="{{datas.name}}"></input></view>
+    <view class='textarea'><textarea  name="desc" placeholder="店铺描述" value="{{datas.desc}}"></textarea></view>
+    <view><button class='submit' formType="submit">修改</button></view>
+  </form>
+</view>

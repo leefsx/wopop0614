@@ -1,0 +1,18 @@
+<template name="form_options">
+  <view class="wp_content form_options_content">
+	<view style="display:inline-block;{{inner_style}}" class="clearFix">
+	  <view class="title fl" style="{{title_style}}">{{param.title}}<text wx:if="{{param.required}}" class="required sup">*</text></view>
+	  <icon wx:if="{{haswarn}}" class="warn" type="warn" size="20" style="right:4rpx;" />
+	  <radio-group class="fr" bindchange="{{onChange}}" name="{{layerid}}" style="text-align:{{param.option_style['text-align']}};" wx:if="{{param.type == 'radio'}}">
+		<label class="{{layerid}}-label" wx:for="{{param.options}}" wx:key="{{index}}">
+		  <radio value="{{index}}" checked="{{_value_[0]==index?true:false}}" />{{item.value}}
+		</label>
+	  </radio-group>
+	  <checkbox-group class="fr" bindchange="{{onChange}}" name="{{layerid}}" style="text-align:{{param.option_style['text-align']}};" wx:else>
+		<label class="{{layerid}}-label" wx:for="{{param.options}}" wx:key="{{index}}">
+		  <checkbox value="{{index}}" checked="{{_value_[index]?true:false}}" />{{item.value}}
+		</label>
+	  </checkbox-group>
+	</view>
+  </view>
+</template>

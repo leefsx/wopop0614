@@ -1,0 +1,43 @@
+<import src="../../wxParse/wxParse.wxml"/>
+<template name="appointment_list">
+  <view wx:if="{{products.length}}">
+  <view class="product-list-nav" data-ste="{{styles.title}}" wx:if="{{param.display.search}}">
+    <view wx:for="{{searchBar}}" wx:key="{{index}}" class="{{(barIdx == item.type)?'active':''}} nav-item">
+      <view class="product_list_title" bindtap="{{resortBy}}" data-sortidx="{{index}}">{{item.alias}}</view>
+      <view class="operate">
+        <text class="{{(item.value == 'desc')?'on':''}} iconfont icon-shangxiajiantou1"></text>
+        <text class="{{(item.value == 'asc')?'on':''}} iconfont icon-shangxiajiantou"></text>
+      </view>
+    </view>
+  </view> 
+  <view class="appointment_list_container">
+    <view class='view-list' wx:for="{{products}}" wx:key="{{item}}"  bindtap="{{navigateToDetail}}" data-productid="{{item.id}}">
+      <view class='product-item'>
+        <view><image mode="aspectFit" src='{{item.thumbnail}}' style="{{styles.thumb}}"></image></view>
+        <view class='view-list-name'><text style="{{styles.title}}">{{item.title}}</text></view>
+        <view class='view-list-detail' wx:if="{{param.display.desc}}">
+                <block  wx:for="{{prdintroArr}}" wx:for-index="idx" wx:key="{{idx}}" wx:for-item="intro">
+                  <template is="wxParse" data="{{wxParseData: intro}}" wx:if="{{index == idx}}" />
+                </block>
+              </view>
+        <view class='view-list-time'>
+          <view class='view-list-time-l'>
+            <text class='view-list-time-l1' wx:if="{{param.display.price&&item.discount!=0}}" style="{{styles.price}}">{{param.price.title+item.price}}</text>
+            <text class='view-list-time-l2' wx:if="{{param.display.discount}}" style="{{styles.discount}}">{{param.discount.title}}{{item.discount==0?item.price:item.discount}}</text>
+            <text class='view-list-time-l3'>/{{item.service_hours}}分钟</text>
+            <text class='view-list-time-l4'>{{param.hadOrder.title+item.hadorders}}</text>
+          </view>
+        </view>
+        <view class='btn-list'>
+          <view class='btn-list-p'>人数{{item.min_total+ '-' +item.max_total}}</view>
+             <view hover-class="navigator-hover" class='btn-list-b'><button wx:if="{{param.display.buy_now}}" style="{{styles.buy_now}}">{{param.buy_now.title}}</button></view>
+          <view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{pagerShow}}" bindtap="{{loadMore}}" class="list-btn">加载更多</view>
+  </view>
+  <view wx:else>无数据</view> 
+</template>

@@ -1,0 +1,23 @@
+<view class="container" style="padding: 0;">
+  <view class="loginbox">
+    <view class="usermotto">
+      <view class="inline-block">
+        <!-- <image src="/image/sno.png" class="loginicon"></image> -->
+        <text class="iconfont icon-zhanghao loginicon"></text>
+        <input type="text" bindinput="userNameInput" placeholder="请输入帐号" />
+      </view>
+      <view class="inline-block" style="border-top:none;">
+        <!-- <image src="/image/pasw.png" class="loginicon"></image> -->
+        <text class="iconfont icon-mima loginicon"></text>
+        <input type="text" bindinput="userPasswordInput" password="true"  placeholder="请输入密码" />
+      </view>
+      <button bindtap="logIn" class="cart_bg_color2">登录</button>
+      <button open-type="getUserInfo" bindgetuserinfo="bindgetuserinfo" data-c_e_id="wx_text403f7ded">微信帐号自动注册</button>
+      <view class="backHome" bindtap="backHome">
+        <!-- <image src="/image/backHome.png"></image> -->
+        <text class="iconfont icon-fanhui1"></text>
+        <text>返回首页</text>
+      </view>
+    </view>
+  </view>
+</view>

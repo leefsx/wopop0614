@@ -1,0 +1,23 @@
+.head{width: 100%;background: url(http://static.websiteonline.cn/website/script/usermanagemob/distrimg/bluesitestar_mywallet.jpg) top center #149eff!important;text-align: center;padding-top: 22px;}
+.content{width: 100%;background-color: #f7f7f7}
+.head image{width: 75px;height: 75px;border-radius: 50%}
+.head_img{width:75px;height: 75px;margin: 0 auto;overflow: hidden;border-radius:50%;}
+.head_money{text-align: center;font-size: 2.5em;line-height: 1.8em;padding-top: 1%;display: block;font-family: arial;font-weight: normal;color: #ffffff}
+.head_txt{display: block;border: #fff 1px solid;border-radius: 5px;-moz-boder-radius: 5px;-webkit-boder-radius: 5px;-o-boder-radius: 5px;color: #fff; padding: 1% 0; width: 30%; text-align: center;margin-left: 5%; margin: 0 auto; margin-bottom: 2%; cursor: pointer;}
+.shop{display: flex;justify-content: space-around;color: #ffffff;text-align: center;padding: 2.5% 0;}
+.head_btsson{display: flex;justify-content: center;}
+.head_btsson .Bt{background-color: #000!important;color: #fff!important;width: 92%; margin: 5% 4%; text-align: center; padding:3% 0;}
+.content_t_c{color: #535353;width: 49.5%; border-right: #e1e1e1 1px solid;text-align: center;padding: 3% 0 5% 0;display: flex;flex-direction: column;border-bottom: #e1e1e1 1px solid;}
+.content_t{display: flex;}
+.main{background-color: #f7f7f7;width: 100%;height: 100%;}
+.section{border-top: 1px solid #f7f7f7;background: #ffffff;}
+.section navigator{padding-left: 4%;display:block;height: 3.8em;line-height: 3.8em;padding-right: 3%; background-size: 2%;overflow: hidden;justify-content: space-between}
+.img_L{float:left;margin-top:1em;display:block;width:2em;height:2em;}
+.img_T{float: left;display: block;margin-left:1em}
+.img_R{float:right;margin-top:1.5em;display:block;width:0.8em;height:1em;}
+.content_t {background: #ffffff}
+.bg{background: #ffffff}
+.footer{position: fixed;bottom: 0px;background: #ffffff;display: flex;justify-content: center;margin: 0 auto;width: 100%;height: 50px;border-top:1px solid #f7f7f7;}
+.sections{margin-bottom: 75px;margin-top: 15px;background-color:#f7f7f7;border-bottom:1px solid #f7f7f7;}
+.footer text{width: 30%;height: 50px;line-height: 50px;padding-left: 5px;padding-right: 5px}
+.footer .center text{border-left:1px solid #cccccc;border-right:1px solid #cccccc}

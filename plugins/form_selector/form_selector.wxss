@@ -1,0 +1,3 @@
+picker {display:inline-block;border:2rpx solid transparent;}
+.picker {padding:0 6rpx;}
+.required {position:absolute;top:0rpx;right:0rpx;}

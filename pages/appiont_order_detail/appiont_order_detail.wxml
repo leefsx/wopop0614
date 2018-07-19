@@ -1,0 +1,54 @@
+<view class="main">
+  <view class="order-status-content cart_bg_color2">
+    <text wx:if="{{order.status_str}}">{{order.status_str}}</text>
+    <text wx:else>已完成</text>
+  </view>
+  <view class="orders-list confirm-box medium_font border_bottom2">
+    <view class="orders-number color2 border_bottom">订单编号：{{order.out_trade_no}}</view>
+    <view class="orders-detail">
+        <image src="{{order.thumbnail}}"></image>
+        <view class="tooLong2" style="line-height: 40rpx;padding-right:70rpx;">{{order.title}}</view>
+        <view class="" style="position: absolute;left: 170rpx;bottom: 0;line-height: 60rpx;">￥{{order.discount_price}}/{{order.service_time}}分钟</view>
+    </view>
+    <view wx:for="{{product}}" wx:key="{{index}}" class="orders-detail border_bottom">
+        <image src="{{item.thumbnail}}"></image>
+        <view class="tooLong">{{item.title}}</view>
+        <view class="">￥{{item.discount_price}} x <text class="color2" style="font-size:26rpx;">{{item.amount}}</text></view>
+    </view>
+    <view class="orders-footer">
+        <view style="text-align:right;"><text>金额：</text><text class="cart_color">￥{{order.total_price}}</text></view>
+        <view class="orders-btns" wx:if="{{order.status_no==1||order.status_no==2}}">
+          <view class="orders-btn cart_bg_color" data-oid="{{order.id}}" bindtap="cancelOrders">取消订单</view>
+          <view class="orders-btn cart_bg_color" data-oid="{{order.id}}" bindtap="payOrders" wx:if="{{order.status_no==1}}">付款</view>
+        </view>
+        <view class="orders-btns" wx:elif="{{order.status_no==4}}">
+          <view class="orders-btn cart_bg_color" data-oid="{{order.id}}" bindtap="deleteOrderList">删除订单</view>
+        </view>
+        
+        <view class="orders-btns" wx:elif="{{order.status_no==7}}">
+          <view class="orders-btn cart_bg_color" data-oid="{{order.id}}" bindtap="confirmOrders">确认服务</view>
+        </view>
+        <view class="orders-btns" wx:elif="{{order.status_no=='3'||order.status_no=='8'}}">
+          <navigator url="../appoint_ratings/appoint_ratings?img={{order.thumbnail}}&oid={{order.id}}&id={{order.aid}}" class="orders-btn cart_bg_color" data-oid="{{order.id}}" bindtap="rating">评价</navigator>
+        </view>
+    </view>
+  </view>
+
+  
+
+  <view class="confirm-pay confirm-box medium_font border_bottom2" style="border-bottom:none;">
+      <view class="delivery-top border_bottom">
+        <text class="fl">支付方式</text>
+        <view class="picker fr">{{order.payment_type=='1'?'在线支付':'到店支付'}}</view>
+      </view>
+
+  </view>
+
+  <view class="confirm-invoice confirm-box medium_font border_bottom2" style="border-bottom:none;">
+    <view wx:for="{{order.userinfo}}" wx:key="{{index}}" class="delivery-top border_bottom">
+      <text class="fl">{{item.key}}</text>
+      <view class="picker fr small_font"><text class="cart_color medium_font">{{item.val}}</text></view>
+    </view>
+  </view>
+
+</view>

@@ -1,0 +1,3 @@
+.title {margin-bottom:20rpx;white-space:nowrap;margin-right: 40rpx;position: relative;}
+.title .sup {position:absolute;color:#f00;}
+.clearFix:after {content:'';clear:both;width:0;height:0;display:block;}

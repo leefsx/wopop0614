@@ -1,0 +1,32 @@
+<view>
+
+  <view class='header'>
+     <view class='title'>手机绑定</view>
+  </view>
+
+  <!--view class='button'>
+    <button class="btn-l">一键绑定</button>
+    <button class="btn-r">手动绑定</button>
+  </view>
+
+  <view class='green'>
+    <button>授权使用</button>
+  </view-->
+
+	<view class='inputs'>
+	  <view class='input'>
+	    <image src='../../static/icons/phone.png'></image>
+	    <input bindinput="resetInput" data-itype="phone" type='number' placeholder='请输入手机号' placeholder-style='color:#ff7e09'></input>
+	  </view>
+	  <view class='input'>
+	    <image src='../../static/icons/suo.png'></image>
+	    <input bindinput="resetInput" data-itype="yzcode" type='number' placeholder='请输入数据计算值' placeholder-style='color:#ff7e09'></input>
+	    <button bindtap="tapResetExpr">{{expr}}</button>
+	  </view>
+	</view>
+
+	<view class='green'>
+	  <button bindtap="tapGetPhone">立即绑定</button>
+	</view>
+
+</view>

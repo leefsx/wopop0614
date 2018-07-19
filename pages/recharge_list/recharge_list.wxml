@@ -1,0 +1,17 @@
+<view class="recharge-list">
+  <block wx:if="{{lists.length > 0}}">
+  <view class="row" wx:for="{{lists}}" wx:key="{{item.id}}">
+	<view class="side-left">
+	  <text class="title">{{item.reason}}</text>
+	  <text class="date">{{item.created_time}}</text>
+	</view>
+	<text class="side-right">{{item.amount}}</text>
+  </view>
+  </block>
+  <block wx:else>
+    <view style="margin:20rpx;">暂无交易明细</view>
+  </block>
+  <view class="pagebox" wx:if="{{total > lists.length}}">
+  	<text>{{pager_tips}}</text>
+  </view>
+</view>

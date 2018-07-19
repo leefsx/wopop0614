@@ -1,0 +1,8 @@
+<template name="category">
+<view class="category" style="{{styles.global}}">
+    <scroll-view wx:if="{{categories.length}}" scroll-x scroll-left="{{scroll_left}}">
+        <view wx:for="{{categories}}" wx:key="{{item.id}}" class="{{tabId == item.id?'active':''}} scroll-item" bindtap="{{navigateToList}}" data-category_id="{{item.id}}" style="{{styles.title + styles.border}}{{tabId == item.id?'color:'+param.title.selectedColor+';border-bottom-color:'+param.border.selectedColor+';':''}}">{{item.name}}</view>
+    </scroll-view>
+	<view wx:else class="err_msg">{{errmsg}}</view>
+</view>
+</template>

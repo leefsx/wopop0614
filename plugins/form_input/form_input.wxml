@@ -1,0 +1,7 @@
+<template name="form_input">
+  <view class="wp_content form_input_content">
+	<input bindinput="{{onInput}}" bindblur="{{onBlur}}" name="{{layerid}}" type="{{itype}}" value="{{_value_}}" class="wxinp" placeholder="{{param.inpval}}" placeholder-style="{{placeholder_style}}" style="{{inner_style}}margin-right:{{param.required?'-6rpx':0}};" />
+	<text wx:if="{{param.required}}" class="required" style="width:120rpx;">*</text>
+	<icon wx:if="{{haswarn}}" class="warn" type="warn" size="20" style="top:calc(50% - 26rpx);right:4rpx;" />
+  </view>
+</template>

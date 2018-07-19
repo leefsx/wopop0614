@@ -1,0 +1,97 @@
+<import src="../../wxParse/wxParse.wxml"/>
+<template name="appointment_detail">
+<scroll-view scroll-y="true" >
+  <view class='header' style="{{styles.thumb}}">
+    <image mode="aspectFit" src="{{detail.thumbnail}}"></image>
+  </view> 
+  <view class='order'>
+    <view class='order-name' wx:if="{{param.display.title}}" style="{{styles.title}}">{{detail.title}}</view>
+    <view wx:if="{{param.display.intro}}" style="{{styles.summary}}" class="order-detail">
+      <template is="wxParse" data="{{wxParseData: prdsummary.nodes}}"/>
+    </view>
+    <view class='money-time'>
+      <text class="money-market" wx:if="{{param.display.price&&detail.discount!=0}}" style="{{styles.price}}">{{param.price.title+detail.price}}</text>
+      <text class='money-time-M' wx:if="{{param.display.discount}}" style="{{styles.discount}}">{{param.discount.title}}{{detail.discount==0?detail.price:detail.discount}}</text>
+      <text wx:if="{{param.display.serviceHours}}">/{{detail.service_hours}}分钟</text>
+    </view>
+    <view class='order-num'>
+        <text class='order-num-p' wx:if="{{param.display.availableNumber}}">人数:<text class='order-num-span'>{{detail.min_total+ '-' +detail.max_total}}</text></text>
+        <text class='order-num-t' wx:if="{{param.display.serviceTimes}}">营业时间:<text class='order-num-span'>{{detail.opening_hours}}</text></text>        
+        <text class='order-num-d'  wx:if="{{param.display.payment}}">{{detail.payment==1?'在线支付':'到店支付'}}</text>
+        <text class='order-num-o' wx:if="{{param.display.hadOrder}}">已预约<text class='order-num-span'>{{detail.hadorders}}</text></text>
+    </view>
+  </view>
+  <view class='assess' wx:if="{{more && param.display.evaluation}}">
+      <view class='assess-m'><text style="{{styles.traderate}}">{{param.traderate.title}}</text></view>
+      <view class='assess-d'>
+        商品满意度 <text style="color:#ff0036;">{{scores}}</text>
+      </view>
+  </view>
+  <view class='content' wx:for="{{accountList}}" wx:key="{{item}}">
+    <view class='content-T'>
+      <view class='content-l'>
+         <image class='content-header' src='{{item.user_head}}'></image>
+         <view class='content-r'>
+            <text class='content-title'>{{item.user_name}}</text>
+            <text class='content-date'>{{item.create_time}}</text>
+         </view>
+      </view>
+    </view>
+    <view class='content-B'><text decode="{{true}}">{{item.content}}</text></view>
+  </view>
+  <view class='ge'></view>
+  <view class='more' wx:if="{{more > 1 && param.display.evaluation}}">
+    <navigator url="{{commentsUrl + '?product_id=' + detail.id}}">查看{{more}}条评论</navigator>
+  </view>
+  <view class='assess1' wx:if="{{param.display.detail}}">
+      <view class='assess-m'><text>预约描述</text></view>
+  </view>
+  <view class='detail' wx:if="{{param.display.detail}}">
+    <view wx:if="{{param.display.intro}}" class="tooLong3 content">
+      <template is="wxParse" data="{{wxParseData: prdintro.nodes}}"/>
+    </view>
+  </view>
+  <view class='footer'>
+     <view class='footer-index'>
+        <image src='{{indeximg}}' style='width:32px;height:32px'></image>
+     </view>
+     <view class='footer-phone'>
+        <image src='{{phoneimg}}' style='width:32px;height:32px'></image>
+     </view>
+     <view class='footer-btn' wx:if="{{param.display.buynow}}">
+       <button bindtap="{{chooseSezi}}" style="{{styles.buy_now}}">立即预约</button>
+     </view>
+  </view>
+       <view class='commodity_screen' wx:if="{{chooseSize}}" bindtap='hideModal'></view>
+       <!--这里是弹出框中的内容-->
+       <view class='commodity_attr_box' wx:if="{{chooseSize}}" animation='{{animationData}}'>
+        
+
+            <view class="header-t" bindtap='{{close}}'>
+              <image src="{{close}}"></image>
+              <text>选择时间段</text>
+            </view>
+            <swiper wx:if="{{clerks.length}}" indicator-dots="{{true}}" autoplay="{{false}}" id="{{current-item-id}}" bindchange="{{chooseWorker}}" class="slide-header">
+              <block wx:for="{{clerks}}" wx:key="{{item}}">
+                <swiper-item>
+                  <image src="{{item.headimg}}" class="slide-image"/>
+                  <view>{{item.nickname}}</view>
+                </swiper-item>
+              </block>
+            </swiper>
+            <view class='num-tt'>
+              <scroll-view scroll-x="true" style="white-space: nowrap;display:flex ">
+                <view wx:for="{{detail.dateArr}}" wx:key="{{item}}" class="{{item.date == service_date ? 'active' : ''}} product-date inline-block" data-val="{{item.date}}" bindtap="{{selDates}}"><text>{{item.day}}\n{{item.week}}</text></view>
+              </scroll-view>
+            </view>
+            <view class="box">
+              <view class="item" wx:for="{{detail.timeArr}}" wx:key="item">
+                <view class="{{item == service_time ? 'active' : ''}} product-item" data-val="{{item}}" bindtap="{{selTimes}}"><text>{{item}}</text></view>
+              </view>
+            </view>
+            <view class='footer1'>
+              <view bindtap="{{submitOrder}}" class='footer-btn'><button>确定</button></view>
+            </view>
+       </view>
+</scroll-view>
+</template>

@@ -1,0 +1,53 @@
+<view>
+    <view class="shop_info">
+        <text class="shop_name">{{order.shop_name?order.shop_name:''}}</text>
+        <text class="shop_addr">{{order.detailed_addr?order.detailed_addr:''}}</text>
+    </view>
+    <view class='pro_list'>
+        <view class='detail' wx:for="{{products}}" wx:key="">
+            <view class='detail_img'>
+            <image mode='aspectFit' src="{{item.feature_img}}"></image>
+            </view>
+            <view class='detail_txt'>
+            <text class='de1'>{{item.product_name}}</text>
+            <text class='de2'>{{item.product_attr?item.product_attr:''}}</text>
+            <text class='de3'>￥{{item.price}}X{{item.amount}}</text>
+            </view>
+        </view>
+        <view class='count_money'>总价:<text>￥{{order.total_price}}</text></view>
+    </view>
+    <view class='lan'>
+      <view class='fx'>
+          <view class="fx_title"><text>取餐时间：</text></view>  
+          <view class="fx_value"><text>{{order.meal_getime}}</text></view>
+      </view>
+      <view class='fx'>
+          <view class="fx_title"><text>订单号：</text></view>  
+          <view class="fx_value"><text>{{order.out_trade_no}}</text></view>
+      </view>
+      <view class='fx'>
+          <view class="fx_title"><text>支付方式：</text></view>  
+          <view class="fx_value"><text>{{order.payment_type}}</text></view>
+      </view>
+      <view class='fx'>
+          <view class="fx_title"><text>买家留言：</text></view>  
+          <view class="fx_value"><text>{{order.message?order.message:''}}</text></view>
+      </view>
+      <view class='fx'>
+          <view class="fx_title"><text>下单时间：</text></view>  
+          <view class="fx_value"><text>{{order.order_time}}</text></view>
+      </view>
+      <view class='fx'>
+          <view class="fx_title"><text>订单状态：</text></view>  
+          <view class="fx_value"><text>{{order.status_str}}</text></view>
+      </view>
+    </view>
+
+    <view class='c' wx:if="{{order.status_no==9}}">
+        <view class='cicle'>
+            <view class='cicle_n'><text>取餐号码</text></view>
+            <view class='cicle_a'><text>{{order.take_number}}</text></view>
+        </view>
+    </view>
+
+</view>

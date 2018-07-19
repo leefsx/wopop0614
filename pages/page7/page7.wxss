@@ -1,0 +1,3 @@
+@import '../../plugins/appointment_detail/appointment_detail.wxss';
+#layer3296BAFB034C4D5DBD6852398C102990{height:auto;background-image:none;background-color:transparent;background-repeat:repeat;background-position:top left;border-color:transparent;border-style:none;border-width:0rpx;border-radius:0rpx;}
+page{background-image:none;background-color:transparent;background-repeat:repeat;background-position:top left;}

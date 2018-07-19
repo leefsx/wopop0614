@@ -1,0 +1,33 @@
+<!--pages/mydis_sub/mydis_sub.wxml-->
+<view class="main">
+  <view class="my-list-nav medium_font">
+      <view bindtap="changActive" data-id="100" class="{{activeIndex == '100' ? 'active':''}}">全部</view>
+      <view bindtap="changActive" data-id="1" class="{{activeIndex == '1' ? 'active':''}}">一级分销</view>
+      <view bindtap="changActive" data-id="2" class="{{activeIndex == '2' ? 'active':''}}">二级分销</view>
+      <view bindtap="changActive" data-id="3" class="{{activeIndex == '3' ? 'active':''}}">三级分销</view>
+  </view>
+  
+  <view class='count'>累计消费:￥{{total_spending}}</view>
+
+
+  <view style='margin-top:20px;' wx:if="{{datas.length}}">
+    <view class="content-box">
+      <view class="content-box-li"  wx:for="{{datas}}" wx:key="index">
+        <view><image src="{{item.weixin_headimgurl?item.weixin_headimgurl:defaulthead}}"></image></view>
+        <view class='imag_r'>
+          <view class="email {{item.did?'':'red'}}">{{item.mobile?item.mobile:item.email}}</view>
+          <view class='jb'>{{item.weixin_nickname||item.firstname+' '+item.lastname }} {{item.levelname}}</view>
+          <view class='money_r'>
+              <view>佣金:{{item.levelcommission}}</view>
+              <view class='per'>分销金额:￥{{item.spending}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{morebutton}}" bindtap="loadmore" class='no'>加载更多</view>
+  </view>
+  <view  wx:else class='no1'>没有记录！</view>
+
+
+
+</view>

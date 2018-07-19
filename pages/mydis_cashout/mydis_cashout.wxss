@@ -1,0 +1,39 @@
+.main{background: #f7f7f7;}
+.head{background: #ffffff;padding-top:20px;padding-bottom: 20px }
+.head navigator{display: flex;justify-content: center;}
+.head .image{padding-right: 10px;}
+.head .image image{width: 50px;height: 50px;}
+.head .text{height: 50px;line-height: 50px;padding-left:10px;}
+.select{margin: 0 auto;height: 50px;line-height: 50px;text-align: center;background: #ffffff;margin-top: 20px;}
+.dis_content{background: #ffffff;margin-top: 20px;padding-bottom: 20px}
+.dis_content .text{text-align: center;padding-top: 20px;}
+.money{display: flex;justify-content: space-around;margin-top: 20px}
+.slider{margin-top: 20px;margin: 0 auto;width: 90%;height: 50px;padding-top: 20px}
+.dis_apply_value,.dis{position: relative}
+.dis_apply_value image{width:20px;height:30px;position:absolute;left:1em;top:1.5em;}
+.dis_apply_value input{width: 80%;padding-left: 11%;padding-right: 2%;border: 1px solid #e1e1e1;background: #f7f7f7;margin-top: 10px;height: 1.9em;line-height: 1.9em; font-size: 2.6em;text-align: right;color: #535353;margin: 0 auto}
+.dis input{width: 80%;margin: 0 auto;margin-top: 20px;padding-left: 11%;padding-right: 2%; border: 1px solid #e1e1e1;
+    background: #f7f7f7; padding-top: 2%;line-height: 1.8em;font-size: 1em;text-align: left;}
+
+.dis image{width:20px;height:30px;position:absolute;left:1em;top:0.1em;}
+.footer{position: fixed;bottom: 0px;background: #ffffff;display: flex;justify-content: center;margin: 0 auto;width: 100%;height: 50px;border-top:1px solid #f7f7f7;}
+.sections{margin-bottom: 75px;margin-top: 15px;background-color:#f7f7f7;border-bottom:1px solid #f7f7f7;}
+.footer text{width: 30%;height: 50px;line-height: 50px;padding-left: 5px;padding-right: 5px}
+.footer .center text{border-left:1px solid #cccccc;border-right:1px solid #cccccc}
+.dis_submit{margin-bottom:50px; height: 50px;line-height: 50px;}
+.dis_submit button{    width: 90%;
+    margin: 0 auto;
+    height: 50px;
+    line-height: 50px;
+    background: none;
+    border: none;
+    background: #149eff;
+    color: #FFF;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -weblik-border-radius: 4px;
+    letter-spacing: 3px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 5%;
+    -webkit-appearance: none;}

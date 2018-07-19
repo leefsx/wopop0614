@@ -1,0 +1,51 @@
+<import src="../../common/package/prompt.wxml"/>
+<view class="main">
+    <view wx:if="{{foods.length}}">
+        <view class="cart-top border_bottom">
+            <icon wx:if="{{selectAllStatus}}" type="success" color="{{insidepage_themecolor}}" class="total-select  cart-pro-select-top" bindtap="selectAll"/>
+            <icon wx:else type="circle" class="total-select  cart-pro-select-top" bindtap="selectAll"/>
+            <text class="cart-top-tex" bindtap="selectAll">购物车</text>
+        </view>
+        <view class="cart-box">
+            <view class="cart-list border_bottom" wx:for="{{foods}}" wx:key="{{index}}">
+                <icon wx:if="{{item.selected}}" type="success" color="{{insidepage_themecolor}}" data-index="{{index}}"  class="cart-pro-select" bindtap="selectList"/>
+                <icon wx:else type="circle" class="cart-pro-select" data-index="{{index}}" bindtap="selectList"/>
+                <navigator url="../details/details?id={{item.cid}}"><image class="cart-thumb" src="{{item.image}}"></image></navigator>
+                <navigator url="../details/details?id={{item.cid}}"><text class="cart-pro-name">{{item.title}}</text></navigator>
+                <text class="cart-pro-price cart_color">￥{{item.sum}}</text>
+                <text class="cart-pro-sku">{{item.skuchecked}}</text>
+                <view class="cart-count-box">
+                    <text class="cart-count-down inner-block" bindtap="minusCount" data-index="{{index}}">-</text>
+                    <input class="cart-count-num inner-block" value="{{item.num}}" data-index="{{index}}" bindblur="bindManual"  bindconfirm="bindManual"></input>
+                    <text class="cart-count-add inner-block" bindtap="addCount" data-index="{{index}}">+</text>
+                </view>
+                <!--<text class="cart-del" bindtap="deleteList" data-index="{{index}}">×</text>-->
+                <icon class="cart-del" size="23" type="cancel" color="#aaa" bindtap="deleteList" data-index="{{index}}"></icon>
+            </view>
+        </view>
+
+        <view class="cart-footer {{showBar?'has_bar':''}}">
+            <icon wx:if="{{selectAllStatus}}" type="success" color="{{insidepage_themecolor}}" class="total-select" bindtap="selectAll"/>
+            <icon wx:else type="circle" class="total-select" bindtap="selectAll"/>
+            <text class="cart-toatl-tex fl" bindtap="selectAll">全选</text>
+            
+            <text class="cart-toatl-qjs {{totleNum>0 ? 'cart-toatl-js' : ''}} fr" bindtap="toConfirm">去结算<text>({{totleNum}})</text></text>
+            <view class="cart-toatl-js-price fr">
+                <view class="cart-toatl-price small_font color2">合计:<text class="cart_color normal_font">￥{{totalPrice}}</text></view>
+                <view class="cart-toatl-addPri color2 small_font">不含运费</view>
+            </view>
+        </view>
+    </view>
+    
+<block wx:if="{{showBar}}">
+	<view style="height:110rpx;"></view>
+	<view class="tabBar" style="color:{{tabs.color}};border-color:{{tabs.borderStyle}};background-color:{{tabs.backgroundColor}};border-top-color:{{tabs.borderTopColor}};">
+	  <view wx:for="{{tabs.list}}" wx:key="{{index}}" class="barList" style="color:{{pageid == item.pagePath ? tabs.selectedColor : tabs.color}}">
+		<view class="barList-content" bindtap="switchTab" data-url="{{item.pagePath}}">
+		  <image class="icon" src="{{pageid == item.pagePath ? item.selectedIconPath : item.iconPath}}"></image>
+		  <view>{{item.text}}</view>
+		</view>
+	  </view>
+	</view></block>
+</view>
+<template is="prompt" data="{{prompt}}"></template>

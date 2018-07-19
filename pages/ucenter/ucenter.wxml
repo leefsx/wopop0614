@@ -1,0 +1,104 @@
+<view class="main">
+    <view class="header cart_bg_color medium_font">
+        <view class="header-top">
+          <view class="header-title">
+            <view wx:if="{{canIUseAvatarUrl}}" class="thumb">
+            <open-data  class="thumb" type="userAvatarUrl"></open-data>
+            </view>
+            <image wx:else src="{{userInfo.avatarUrl}}" class="thumb"></image>
+            <open-data wx:if="{{canIUseNickName}}"  class="nickname" type="userNickName"></open-data>
+            <text wx:else class="nickname">{{userInfo.nickName}}</text>
+          </view>
+        </view>
+        <view class="header-bottom small_font">
+          <view>
+            <text>{{userInfo.account_points}}</text>
+            <text>积分</text>
+          </view>
+          <view>
+            <text>￥{{userInfo.account_money}}</text>
+            <text>余额</text>
+          </view>
+        </view>
+        <!-- <text class="iconfont icon-fanhui1 page_back"></text> -->
+    </view>
+    <view class="orders-box">
+        <view class="orders">
+            <navigator url="../orders/orders?activeIndex=all">
+              <text>我的订单</text>
+              <text class="small_font">查看全部</text>
+            </navigator>
+        </view>
+
+        <view class="orders-state">
+            <navigator url="../orders/orders?activeIndex=nopay">
+                <view class="state-image">
+                    <text class="iconfont icon-daifukuan cart_color"></text>
+                    <view class="cart_color car_border">{{order_num_state.nopay_num}}</view>
+                </view>
+                <view class="state-tex">待付款</view>
+            </navigator>
+            <navigator url="../orders/orders?activeIndex=delivery">
+                <view class="state-image">
+                    <text class="iconfont icon-fahuotixing cart_color"></text>
+                    <view class="cart_color car_border">{{order_num_state.hadpay_num}}</view>
+                </view>
+                <view class="state-tex">待发货</view>
+            </navigator>
+            <navigator url="../orders/orders?activeIndex=getit">
+                <view class="state-image">
+                    <text class="iconfont icon-daishouhuo cart_color"></text>
+                    <view class="cart_color car_border">{{order_num_state.delivery_num}}</view>
+                </view>
+                <view class="state-tex">待收货</view>
+            </navigator>
+            <navigator url="../orders/orders?activeIndex=rating">
+                <view class="state-image">
+                    <text class="iconfont icon-daipingjia1 cart_color"></text>
+                    <view class="cart_color car_border">{{order_num_state.getit_num}}</view>
+                </view>
+                <view class="state-tex">待评价</view>
+            </navigator>
+        </view>
+    </view>
+    <view class="address-box">
+        <view class="address-manage">
+            <navigator url="../appiont_order_list/appiont_order_list">我的预约</navigator>
+        </view>
+    </view>
+    <view class="address-box">
+        <view class="address-manage">
+            <navigator url="../meal_order_list/meal_order_list">手机点单</navigator>
+        </view>
+    </view>
+    <view class="address-box" wx:if="{{isdistrib}}">
+        <view class="address-manage">
+            <navigator url="../mydistribution/mydistribution">我的分销</navigator>
+        </view>
+    </view>
+	<view class="address-box">
+        <view class="address-manage">
+            <navigator url="../recharge/recharge">账户充值</navigator>
+        </view>
+    </view>
+    <view class="address-box">
+        <view class="address-manage">
+            <navigator url="../coupon/coupon">优惠券</navigator>
+        </view>
+    </view>
+    <view class="address-box">
+        <view class="address-manage">
+            <navigator url="../address-list/address-list">地址管理</navigator>
+        </view>
+    </view>
+    <block wx:if="{{showBar}}">
+	<view style="height:110rpx;"></view>
+	<view class="tabBar" style="color:{{tabs.color}};border-color:{{tabs.borderStyle}};background-color:{{tabs.backgroundColor}};border-top-color:{{tabs.borderTopColor}};">
+	  <view wx:for="{{tabs.list}}" wx:key="{{index}}" class="barList" style="color:{{pageid == item.pagePath ? tabs.selectedColor : tabs.color}}">
+		<view class="barList-content" bindtap="switchTab" data-url="{{item.pagePath}}">
+		  <image class="icon" src="{{pageid == item.pagePath ? item.selectedIconPath : item.iconPath}}"></image>
+		  <view>{{item.text}}</view>
+		</view>
+	  </view>
+	</view></block>
+</view>

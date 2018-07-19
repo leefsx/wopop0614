@@ -1,0 +1,26 @@
+<template name="article_list">
+<view class="article-list">
+    <view class="article-list-container">
+        <view class="article-list-ul">
+            <view wx:for="{{articles}}" bindtap="{{navigateToDetail}}" data-articleid="{{item.id}}" wx:key="{{item.id}}" class="article-list-li clearFix" style="{{styles.linode}}">
+                <!-- <image wx:if="{{param.display.thumb}}" src="{{item.doc_image}}" style="{{styles.thumb}}"></image> -->
+                <view wx:if="{{param.display.thumb}}" class="article-list-li-img" style="{{styles.thumb}}">
+                  <image src="{{item.doc_image}}" style="width: 100%;height: 100%;"></image>
+                </view>
+                <view class="list-li-content">
+                    <view class="list-li-title" style="{{list_li_margin}}">
+                        <text wx:if="{{param.display.category}}" class="cate_title color" style="{{styles.category}}">[{{item.category_name}}]</text><text wx:if="{{param.display.title}}" style="{{styles.title}}">{{item.title}}</text>
+                    </view>
+                    <view wx:if="{{param.display.desc}}" class="list-li-detail" style="{{styles.desc}}">{{item.intro}}</view>
+                    <view class="list-li-info clearFix" style="{{styles.date}}">
+                        <text wx:if="{{param.display.views}}" class="fl"><text class="iconfont icon-weibiaoti-ss"></text>{{item.v_num}}</text>
+                        <text wx:if="{{param.display.date}}" class="fr"><text class="iconfont icon-cloud-time"></text>{{item.publish_time}}</text>
+                    </view>
+                </view>
+            </view>
+			<view wx:if="{{articles.length && pagerShow}}" class="list-btn" bindtap="{{loadMore}}" style="{{styles.more}}">加载更多</view>
+            <view wx:if="{{articles.length == 0}}" class="article-list-li clearFix err_msg">{{errmsg}}</view>
+        </view>
+    </view>
+</view>
+</template>

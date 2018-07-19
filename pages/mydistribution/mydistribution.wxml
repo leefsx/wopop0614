@@ -1,0 +1,51 @@
+<!--pages/mydistribution/mydistribution.wxml-->
+<view class="main">
+    <view class="head">
+      <view class='head_img' wx:if="{{canIUseAvatarUrl}}">
+          <open-data  class="thumb" type="userAvatarUrl"></open-data>
+      </view>
+      <view class='head_money'>￥{{money}}</view>
+      <view class='head_txt'><text>可提佣金</text></view>
+      <view class='shop'>
+          <view class='l'>最近一次消费￥{{datas.lastdealnum}}</view>
+          <view class='r'>累计佣金￥{{datas.commission}}</view>
+      </view>
+      <view class='head_btsson'>
+        <view class='Bt'>
+            <navigator url='../mydis_cashout/mydis_cashout'>我要提现</navigator>
+        </view>
+        <view class='Bt'>
+            <navigator url='../mydis_record/mydis_record'>提现记录</navigator>
+        </view>
+      </view>
+    </view>  
+
+    <view class='content'>
+      <view class='content_t'>
+          <navigator url='../fxdp_sy/fxdp_sy' class='content_t_c'>
+              <view>{{datas.fenxiao_num}}</view>
+              <view><view>我的分销</view></view>
+          </navigator>
+          <navigator url='../mydis_sub/mydis_sub' class='content_t_c'>
+              <view>{{datas.subuser_num}}</view>
+              <view><view>我的下级</view></view>
+          </navigator>
+      </view>
+
+      <view class='sections'>
+            <view class="section">
+              <navigator url='../mydis_edit/mydis_edit' hover-class='bg'>
+                  <view>
+                      <image class='img_L' src='../../common/mobileversion_usercenter_12.jpg'></image>
+                  </view>
+                  <view>
+                      <text class='img_T'>店铺设置</text>
+                  </view>
+                  <view>
+                      <image class='img_R'  src='../../common/mobileversion_usercenter_13.jpg'></image>
+                  </view>
+              </navigator>
+            </view>        
+      </view>
+    </view>
+</view>

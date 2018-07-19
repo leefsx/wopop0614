@@ -1,0 +1,13 @@
+<template name="navigation">
+<view class="navigation">
+    <view class="navigation-btn" bindtap="{{changeNavigationShow}}" style="{{styles.global}}">
+        <image aspectfit src="{{src}}"></image>
+    </view>
+    <view class="navigation-detail" wx:if="{{navigationShow}}">
+        <view class="mask" bindtap="{{changeNavigationShow}}"></view>
+        <view class="navigation-content" bindtap="{{changeNavigationShow}}">
+          <view class="navigation-item" wx:for="{{datas}}" wx:key="{{index}}" data-index="{{index}}" bindtap="{{redirectTo}}" style="{{styles.menu}}"><view style="{{styles.title}}">{{item.name}}</view></view>
+        </view>
+    </view>
+</view>
+</template>

@@ -1,0 +1,45 @@
+<view>
+    <!-- <view class='title'>提交订单</view> -->
+
+    <view class='detail' wx:for="{{carts}}" wx:key="{{item}}">
+        <view class='detail_img'>
+          <image mode='aspectFit' src="{{item.feature_img}}"></image>
+        </view>
+        <view class='detail_txt'>
+          <text class='de1'>{{item.name}}</text>
+          <text class='de2'>{{item.description}}
+          <block wx:if="{{item.spec_id}}"> {{item.spec_id.name}}</block>
+          <block wx:if="{{item.ingred_id}}"> {{item.spec_id.name}}</block>
+          <block wx:if="{{item.taste_id}}"> {{item.taste_id.name}}</block>
+          </text>
+          <text class='de3'>￥{{item.price}}</text>
+        </view>
+    </view>
+    <view class='lan'>
+      <view class='fx'>
+        <view style='flex:2;color:#b5b5b5'><text>取餐时间</text></view>  
+          <view style='flex:5'>
+            <picker bindchange="getimeChange" value="{{getime_index}}" range="{{getime_type}}">
+              <view class="picker">
+                {{getime_type[getime_index]}}
+              </view>
+            </picker>
+        </view>
+      </view>
+      <view class='fx' wx:for="{{detail}}" wx:key="">
+          <view style='flex:2;color:#b5b5b5'><text>{{item.t}}</text></view>  
+          <view style='flex:5'><text>{{item.r}}</text></view>
+      </view>
+      
+      <view class='fx'>
+          <view style='flex:2;color:#b5b5b5'><text>买家留言</text></view>  
+          <view style='flex:5'><input bindblur="binkMessageConfirm" type="text" /></view>
+      </view>
+    </view>
+
+    <view class='footer'>
+      <view class='footer-l'><text>实付款:{{cartsprice}}</text></view>
+      <view class='footer-r'><navigator bindtap="submitOrder">提交订单</navigator></view>
+    </view>
+
+</view>

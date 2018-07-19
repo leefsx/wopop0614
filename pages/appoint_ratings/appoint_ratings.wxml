@@ -1,0 +1,17 @@
+<view class="main">
+  <view class="ratings-top confirm-box medium_font border_bottom2">
+    <image wx:if="{{prdimg.length}}" src="{{prdimg}}"></image>
+    <view>
+      <text bindtap="doRate" data-idx="{{index}}" wx:for="{{stars}}" wx:key="{{index}}" class="iconfont {{item}}"></text>
+    </view>
+  </view>
+
+  <view class="ratings-bottom confirm-box medium_font border_bottom2">
+    <textarea focus="{{focus}}" bindinput="getMessage" auto-height placeholder="宝贝满足你的期待吗？说说他的优点和缺点吧。" />
+    <!--textarea auto-height wx:else value="{{content}}" disabled="true" /-->
+  </view>
+  <view class="ratings-btn">
+    <button wx:if="{{errmsg.length==0}}" class="cart_bg_color2" bindtap="onSubmit">提交</button>
+	<text wx:else style="color:#ff0000;">{{errmsg}}</text>
+  </view>
+</view>

@@ -1,0 +1,16 @@
+<view class="main">
+    <form bindsubmit="submitAccount" report-submit="true">
+      <picker bindchange="accountsChange" value="{{aindex}}" range="{{accounts}}">
+        <view class="picker">
+            选择收款方式：{{accounts[aindex]}}
+        </view>
+      </picker>
+
+      <view class='input'><input name="account_no" placeholder='收款帐号'></input></view>
+
+      <view class='input'><input name="account_info" placeholder='收款人'></input></view>
+      
+      <view class='button'><button formType="submit">提交</button></view>
+
+    </form>
+</view>

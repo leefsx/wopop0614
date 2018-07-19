@@ -1,0 +1,139 @@
+<view class="main">
+  <view class="orders-list confirm-box border_bottom2">
+      <!--<view class="orders-number color2 border_bottom">订单编号：{{oid}}</view>-->
+      <navigator wx:for="{{selectCarts}}" url="../details/details?id={{item.cid||item.id}}" class="orders-detail border_bottom">
+          <image src="{{item.image||item.product_thumb}}"></image>
+          <view class="tooLong2" style="line-height: 40rpx;">{{item.title||item.product_name}}</view>
+          <view class="tooLong2" wx:if="{{item.skuchecked}}" style="line-height: 40rpx;">{{item.skuchecked}}</view>
+          <view class="" style="position: absolute;left: 170rpx;bottom: 0;line-height: 60rpx;">{{item.num||item.amount}}</view>
+          <!-- <text class="orders-status cart_color">待付款</text> -->
+      </navigator>
+      <view class="orders-footer">
+          <text class="fl">{{nowtime}}</text>
+          <text class="fr">应付:<text class="cart_color strong">￥{{lastPrice}}</text></text>
+      </view>
+  </view>
+
+  <view class="delivery-box confirm-box border_bottom2">
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{delivery_mode}}">
+      <view class="delivery-top border_bottom">
+        <text class="fl">配送方式</text>
+        <view class="picker fr"><text wx:if="{{!delivery_title}}">请选择</text><text>{{delivery_mode[index]}}</text><text wx:if="{{delivery_title}}" class="car_color">{{delivery_title}}+￥{{ifee||0}}</text></view>
+      </view>
+    </picker>
+    <view class="delivery-middle border_bottom" wx:if="{{dis_key>0}}">
+      <view wx:if="{{delivery_addr || pickupaddrs}}" bindtap="addAddr" class="delivery_addr-no-content">
+        <view class="delivery_addr-no-list">
+            <!-- <image src="../../../image/local.jpg" style="width:50px; heigh:50px;"></image> -->
+            <view wx:if="{{dis_key==1}}">
+            <picker bindchange="bindpickupaddrChange" value="{{pickaddrindex}}" range-key="address" range="{{pickupaddrs}}">
+            <view>请选择自提地址</view>
+            <view class="addr_detail small_font pickupaddr">
+               当前自提地址: {{pickupaddrs[pickaddrindex].address}}
+            </view>
+            </picker>
+            </view>
+            <view wx:elif="{{!dis_key||dis_key>1}}">
+            <view class="addr_name normal_font">收货人：<text class="cart_color">{{address.reciever_name}}</text></view>
+            <view class="addr_phone medium_font">电话：{{address.phone}}</view>
+            <view class="addr_detail small_font tooLong">地址：{{address.detail}}</view>
+            </view>
+            
+        </view>
+      </view>
+      <view wx:else class="delivery_addr-no-content" bindtap="addAddr">
+        <text class="delivery_addr-no-plus">+</text>
+        <text class="delivery_addr-no-tex">添加收货人信息</text>
+      </view>
+    </view>
+    <picker wx:if="{{delivery_time.length&&(!dis_key||dis_key>1)}}" mode="date" value="{{date}}" start="{{start_date}}" end="{{end_date}}" bindchange="bindDateChange">
+      <view class="delivery-top border_bottom ">
+        <text class="fl">配送日期</text>
+        <view class="picker fr">{{date}}</view>
+      </view>
+    </picker>
+    <picker bindchange="bindTimeChange" wx:if="{{delivery_time.length&&(!dis_key||dis_key>1)}}" value="{{index}}" range="{{delivery_time}}">
+      <view class="delivery-top border_bottom ">
+        <text class="fl">配送时间</text>
+        <view class="picker fr">{{delivery_time[index_time]}}</view>
+      </view>
+    </picker>
+  </view>
+
+  <view class="confirm-pay confirm-box border_bottom2">
+    <picker bindchange="bindPayChange" value="{{index}}" range="{{pay_mode}}">
+      <view class="delivery-top border_bottom">
+        <text class="fl">支付方式</text>
+        <view class="picker fr">{{pay_mode[index_pay]}}</view>
+      </view>
+    </picker>
+    <view wx:if="{{index_pay==0}}" class="pay_way">
+      <view class="pay_way_list" wx:for="{{pay_ways}}">
+         <image  src="{{item.src}}" class="{{item.way_id==pay_way_id?'active':''}}" data-id="{{item.way_id}}" bindtap="changePay"></image>
+         <icon wx:if="{{item.way_id==pay_way_id}}" type="success_no_circle" size="10" color="#fff"/>
+      </view>
+     
+    </view>
+    <view class="border_bottom delivery-desc" wx:if="{{description}}">
+      <view class="orders-number clearFix">
+        <text class="fl descfl">描述</text>
+        <text class="fr descfr">{{description}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="confirm-pay confirm-box border_bottom2">
+    
+    <picker bindchange="bindCouponChange" value="{{index}}" range="{{coupon_mode}}" range-key="name">
+      <view class="delivery-top border_bottom  coupon-list" >
+        <text class="fl">优惠券:<text class="cart_color">{{coupon}}张</text></text>
+        <view class="picker fr">{{coupon_mode[index_coupon]['name']}}</view>      
+      </view>
+    </picker>
+    <picker bindchange="bindIntegralChange" value="{{index}}" range="{{integral_mode}}">
+      <view class="delivery-top border_bottom  integral-list">
+        <text class="fl">可用积分:<text class="cart_color">{{ujfdata.account_points || 0}}</text></text>
+        <view class="picker fr small_font color2">已用{{integral || integral_mode[index_integral] || 0}}积分,<text class="cart_color medium_font">-￥{{integral_money}}</text></view>      
+      </view>
+    </picker>
+    <picker bindchange="bindBalanceChange" value="{{index}}" range="{{balance_mode}}">
+      <view class="delivery-top border_bottom  balance-list">
+        <text class="fl">可用余额:<text class="cart_color">￥{{ujfdata.account_money || 0}}</text></text>
+        <view class="picker fr cart_color">-￥{{balance || balance_mode[index_balance] || 0}}</view> 
+      </view>
+    </picker>
+  </view>
+
+  <view class="confirm-invoice confirm-box border_bottom2" wx:if="{{payInfo.invoice=='0'}}">
+    <picker bindchange="bindInvoiceChange" value="{{index}}" range="{{invoice_mode}}">
+      <view class="delivery-top border_bottom">
+        <text class="fl">发票</text>
+        <view class="picker fr">{{invoice_mode[index_invoice]}}</view>
+
+      </view>
+    </picker>
+    <view wx:if="{{index_invoice == 1}}" class="invoice-box confirm-msg confirm-box border_bottom2">
+      <view class="confirm-msg-box">
+        <input placeholder="发票抬头" bindblur="binkInvoiceText" type="text" />
+      </view>
+    </view>
+  </view>
+
+
+  <view class="confirm-msg confirm-box border_bottom2">
+    <view class="confirm-msg-box">
+       <!-- <image src="../../../image/msg.jpg"></image>  -->
+       <text class="iconfont icon-edit"></text> 
+      <input placeholder="给商家留言" bindblur="binkMessageConfirm" type="text" />
+    </view>
+  </view>
+
+  <view class="confirm-footer">
+      <text class="cart-toatl-price">实付款:<text class="cart_color strong">￥{{total_price}}</text></text>
+      <form bindsubmit="submitOrder" report-submit="true"> 
+        <button formType="submit" class="confirm-pay cart_bg_color2" >提交订单</button>
+      </form>
+  </view>
+
+
+
+</view>

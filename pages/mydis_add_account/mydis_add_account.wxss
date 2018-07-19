@@ -1,0 +1,16 @@
+.picker{border:1px solid #e9e9e9;margin: 0 auto;width: 90%;height: 50px;line-height: 50px;margin-top: 15px}
+.input input{border:1px solid #e9e9e9;margin: 0 auto;width: 90%;height: 50px;line-height: 50px;margin-top: 15px;}
+.button{margin-top: 35px;}
+.button button{width: 90%;
+    margin: 0 5%;
+    background: none;
+    border: none;
+    background: #149eff;
+    color: #FFF;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -weblik-border-radius: 4px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    font-size: 1.3em;}
+

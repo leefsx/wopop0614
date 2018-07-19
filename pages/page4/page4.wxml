@@ -1,0 +1,17 @@
+<import src='../../plugins/article_detail/article_detail.wxml' />
+
+<view id="scroll_container" style="">
+	<view id="layerC33BDD9181A23B62415C7A08DA43A9B5" class="mod_wrapper">
+		<template is="article_detail" data="{{ ...layerC33BDD9181A23B62415C7A08DA43A9B5}}"/>
+	</view>
+	<block wx:if="{{showBar}}">
+	<view style="height:100rpx;"></view>
+	<view class="tabBar {{tabs.isIphoneX?'isIphoneX':''}}" style="color:{{tabs.color}};border-color:{{tabs.borderStyle}};background-color:{{tabs.backgroundColor}};border-top-color:{{tabs.borderTopColor}};">
+	  <view wx:for="{{tabs.list}}" wx:key="{{index}}" class="barList" style="color:{{pageid == item.pagePath ? tabs.selectedColor : tabs.color}}">
+		<view class="barList-content" bindtap="switchTab" data-url="{{item.pagePath}}">
+		  <image class="icon" src="{{pageid == item.pagePath ? item.selectedIconPath : item.iconPath}}"></image>
+		  <view>{{item.text}}</view>
+		</view>
+	  </view>
+	</view></block></view>
+

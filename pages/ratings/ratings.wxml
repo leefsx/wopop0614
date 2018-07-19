@@ -1,0 +1,18 @@
+<view class="main">
+  <view class="ratings-top confirm-box medium_font border_bottom2">
+    <image src="{{product[0].product_thumb}}"></image>
+    <view>
+      <!-- <image src="{{item}}" wx:for="{{wjxNum}}" data-index="{{index}}" bindtap="selectStar"></image> -->
+      <text wx:for="{{wjxNum2}}" data-index="{{index}}" bindtap="selectStar2" class="iconfont {{item}}"></text>
+    </view>
+  </view>
+
+  <view class="ratings-bottom confirm-box medium_font border_bottom2">
+    <textarea auto-height wx:if="{{submit}}" placeholder="宝贝满足你的期待吗？说说他的优点和缺点吧。" bindblur="binkContentConfirm" />
+    <textarea auto-height wx:else value="{{content}}" disabled="true" />
+  </view>
+  <view class="ratings-btn">
+    <button class="cart_bg_color2" wx:if="{{submit}}" bindtap='submit'>提交</button>
+    <button class="cart_bg_color2" wx:else >已评价</button>
+  </view>
+</view>

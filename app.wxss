@@ -1,0 +1,143 @@
+/**app.wxss**/
+@import 'common/fonts/icon.wxss';
+@import 'common/fonts/reset.wxss';
+
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+}
+
+#scroll_container {
+  position: relative;
+  width:100%;
+  height: 100%;
+} 
+
+#canvas{
+  position: relative;
+  padding: 0!important;
+  width:100%;
+  height: 100%;
+}
+.wp_content{font-family:'Microsoft YaHei',-apple-system-font,Helvetica Neue,Helvetica,sans-serif;position:relative;width:100%;height:100%;}
+.mod_wrapper {position:relative;height:150px;box-sizing:border-box;}
+.freelayout .mod_wrapper{position:absolute;left:0;top:0;}
+
+.tabBar{
+  position: fixed;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  height: 100rpx;
+  box-sizing: border-box;
+  z-index: 500;
+  border-top: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+}
+.tabBar .barList{
+  flex: 1;
+  height: 100rpx;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+}
+.tabBar .barList-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around; 
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+.tabBar .barList-content image{
+  width: 50rpx;
+  height: 50rpx;
+}
+.tabBar .barList-content view{
+  line-height: 30rpx;
+}
+.tabBar .barList .selectedIcon{
+  display: none;
+}
+.tabBar .barList.on .selectedIcon{
+  display: block;
+}
+.tabBar .barList.on .icon{
+  display: none;
+}
+.has_bar{
+  bottom: 100rpx !important;
+}
+/* 内页主题设置 */
+.cart_color{
+  color: #c71f3b !important;
+}
+.cart_bg_color{
+  background-color: #c71f3b !important;
+}
+.cart_bg_color2{
+  background-color: #c71f3b !important;
+  color: #fff !important;
+}
+.cart_bor_color{
+  border-color: #c71f3b !important;
+}
+.car_border{
+  border: 1rpx solid  #c71f3b !important;
+}
+.cart-toatl-js{
+  background-color: #c71f3b !important;
+}
+.pay_way image.active{
+  border: 1rpx solid #c71f3b !important;
+}
+.pay_way image.active::after{
+background-color: #c71f3b !important;
+}
+.my-list-nav view.active{
+  color: #c71f3b !important;
+  border-bottom: 6rpx solid #c71f3b !important;
+}
+.coupon-nav view.active{
+  color: #c71f3b !important;
+  border-bottom: 6rpx solid #c71f3b !important;
+}
+
+.icon-wujiaoxing{
+  color: #c71f3b !important;
+}
+
+
+
+
+/* 产品详情及列表主题定制 */
+.detail-container-simple-title-list.on{
+  color: #c71f3b !important;
+  border-color: #c71f3b !important;
+}
+.property-list-li text.active{
+  color:#fff;
+  background-color:#c71f3b !important;
+}
+.nav-item.active{
+  border-color: #c71f3b !important;
+}
+.nav-item.active .title{
+  color: #c71f3b !important;
+}
+.nav-item.active .operate text.on{
+  color: #c71f3b !important;
+}
+.tabBar.isIphoneX {
+  height: 140rpx;
+  padding-bottom: 40rpx;
+}

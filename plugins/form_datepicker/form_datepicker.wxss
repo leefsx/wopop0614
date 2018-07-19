@@ -1,0 +1,2 @@
+.wxinp {display:inline-block;background-image:none;border:2rpx solid #d7dde4;cursor:text;overflow:visible;}
+.required {position:absolute;top:0rpx;right:0rpx;}
