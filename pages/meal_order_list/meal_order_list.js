@@ -266,7 +266,7 @@ Page({
         let oid = order.id
         let total_price = order.total_price
         if (oid && total_price){
-          comm.wxPay(oid,total_price);
+          comm.wxPay(oid,total_price,'meal');
         }else{
           wx.showModal({
             title: '订单异常',

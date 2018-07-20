@@ -71,7 +71,7 @@ function pay(param) {
     }
   })
 }
-function wxPay(oid, total_price) {
+function wxPay(oid, total_price, type ='appoit') {
   const openid = wx.getStorageSync('openid');
   if (openid.trim().length == 0) {
     wx.showModal({
@@ -84,7 +84,8 @@ function wxPay(oid, total_price) {
 
   wx.showLoading({ mask: true, title: '微信支付' });
   // 预支付交易会话标识
-  app.apiRequest('appoit', 'getprepayid', {
+  let classType = type ? type : 'appoit'
+  app.apiRequest(classType, 'getprepayid', {
     data: { oid, total_price, openid },
     method: 'POST',
     success(res) {
@@ -98,7 +99,11 @@ function wxPay(oid, total_price) {
           "signType": resdata.signType,
           "paySign": resdata.paySign,
           success(res) {
-            wx.navigateTo({ url: '../ucenter/ucenter' })
+            if (classType == 'meal'){
+              wx.navigateTo({ url: '../meal_order_list/meal_order_list' })
+            }else{
+              wx.navigateTo({ url: '../ucenter/ucenter' })
+            }
           },
           fail(res) {
             wx.showModal({

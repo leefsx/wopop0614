@@ -42,7 +42,6 @@ Page({
       opacity: "1"
     })
     let param = {}
-    shop_id = 3
     if (shop_id) param.shop_id = shop_id
     that.data.shop_id = shop_id
     that.getMeals(param)

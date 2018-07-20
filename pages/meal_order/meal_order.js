@@ -11,8 +11,7 @@ Page({
       { t: "下单时间：", r: "" },
     ],
     shop_id: 0,
-    getime_type: [],
-    getime_index: 0,
+    getime_type: '立即取餐',
     message: ''
   },
 
@@ -23,27 +22,16 @@ Page({
     wx.setNavigationBarTitle({
       title: '提交订单'
     })
+    let skey = wx.getStorageSync('openid') + '_mealshop';
+    let gettimes = wx.getStorageSync(skey)
+    let getime_type = this.data.getime_type
+    if (gettimes.gettype == '1') getime_type = gettimes.gettime
     let cartsprice = options.cartsprice
     let shop_id = options.shop_id
     let detail = this.data.detail
     let param = { shop_id }
     let that = this
-    app.apiRequest('meal', 'onOrder', {
-      data: param,
-      success: function (res) {
-        if (res.data.result == 'OK') {
-          let getime_type = that.data.getime_type
-          if (res.data.getime_type=='1'){
-            getime_type = ['稍后取餐']
-          } else if (res.data.getime_type == '0'){
-            getime_type = ['立即取餐']
-          }else{
-            getime_type = ['立即取餐', '稍后取餐']
-          }
-          that.setData({ getime_type })
-        }
-      }
-    })
+    that.setData({ getime_type })
     let date = new Date()
     let year = date.getFullYear()
     let month = date.getMonth() + 1
@@ -54,11 +42,10 @@ Page({
     this.setData({ cartsprice, carts, detail, shop_id})
   },
   submitOrder(e){
-    let getime_index = this.data.getime_index
     let shop_id = this.data.shop_id
     let openid = wx.getStorageSync('openid');
     let orders = {
-      getime_type: this.data.getime_type[getime_index],
+      getime_type: this.data.getime_type,
       message: this.data.message,
       cartsprice: this.data.cartsprice,
       shop_id: shop_id,
@@ -104,10 +91,6 @@ Page({
       }
         
     })
-  },
-  getimeChange(e){
-    let getime_index = e.detail.value
-    this.setData({ getime_index })
   },
   binkMessageConfirm(e){
     this.setData({
