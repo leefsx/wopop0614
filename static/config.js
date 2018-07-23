@@ -59,7 +59,8 @@ module.exports = { "checkcode": "zxBX84QB62NFGjpSXXNfjJx0BT4mG4w7", "appid": "wx
       'padding-right': 5,
     },
     "minusplus": {
-      'background-color': '#ff862c',
+      // 'background-color': '#ff862c',
+      'background-color': '#DA70D6',
       color: '#fff',
     },
     "minusplus_icon": {

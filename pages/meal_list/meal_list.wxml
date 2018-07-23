@@ -42,21 +42,20 @@
                                                       <view hidden="{{!dish.count||dish.count == 0}}" class="dish-item-count-minus">
                                                           <view class='add_j' style="{{styles.minusplus}}">
                                                             <view data-id="{{dish.id}}" data-index="{{index}}" data-type="list" bindtap="minusCount" style="{{styles.minusplus_icon}}">
-                                                              <image class="image" src="/pages/meal_list/resources/pic/j.png" /> 
+                                                              <text class='iconfont icon-minus-bold'></text>
                                                             </view>
                                                             <view>
-                                                              <text hidden="{{!dish.count||dish.count == 0}}">{{dish.count}}</text>                                                            
+                                                              <text hidden="{{!dish.count||dish.count == 0}}">{{dish.count}}</text>                                                          
                                                             </view>
                                                             <view data-id="{{dish.id}}" data-index="{{index}}" data-type="list" bindtap="addCount" style="{{styles.minusplus_icon}}">
-                                                              <image class="image" src="/pages/meal_list/resources/pic/a.png" />
+                                                              <text class='iconfont icon-jiahao'></text>
                                                             </view>
                                                           </view>
 
 
                                                       </view>
                                                   </view>
-                                                  <view class="dish-item-count-plus" data-id="{{dish.id}}" data-index="{{index}}" data-type="list" bindtap="addCount" style="{{styles.minusplus_icon}}">
-                                                      <image class="image" src="/pages/meal_list/resources/pic/a.png" />
+                                                  <view class="dish-item-count-plus" data-id="{{dish.id}}" data-index="{{index}}" data-type="list" bindtap="addCount" style="{{styles.minusplus_icon}}">                            <text class='iconfont icon-jiahao'></text>
                                                   </view>
                                               </view>
                                           </view>
@@ -142,13 +141,13 @@
 
                     <view class='add_j1' style="{{styles.minusplus}}">
                       <view data-id="{{item.id}}" data-index="{{index}}" data-type="cart" bindtap="minusCount" style="{{styles.minusplus_icon}}">
-                        <image class="image" src="/pages/meal_list/resources/pic/j.png" /> 
+                          <text class='iconfont icon-minus-bold'></text>
                       </view>
                       <view>
                         <text>{{item.count}}</text>                                                            
                       </view>
                       <view data-id="{{item.id}}" data-index="{{index}}" data-type="cart" bindtap="addCount" style="{{styles.minusplus_icon}}">
-                        <image class="image" src="/pages/meal_list/resources/pic/a.png" />
+                         <text class='iconfont icon-jiahao'></text>
                       </view>
                     </view>
                 </view>  

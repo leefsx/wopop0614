@@ -1,7 +1,7 @@
 {
   "pages":[
+        "pages/meal_list/meal_list",
     "pages/meal_location/meal_location",
-    "pages/meal_list/meal_list",
     "pages/ucenter/ucenter",
     "pages/meal_order_list/meal_order_list",
     "pages/meal_phoneauth/meal_phoneauth",
