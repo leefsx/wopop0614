@@ -19,11 +19,14 @@ Page({
       total: { count: 0, money: 0 }, //用来放多少个商品和共多少钱
       windowHeight: "", //屏幕高度
       flag: true, //加号
-      showModalStatus: false, // 购物车详情弹出窗口
+      showModalStatus: false, // 购物车详情弹出窗口,
+      styles: {},
+      text: {}
   },
   onLoad(options) {
     let shop_id = options.shop_id
     var that = this;
+    that.parseStyle()
     // 页面初始化 options为页面跳转所带来的参数
     wx.getSystemInfo({
       success: function (res) {
@@ -70,14 +73,10 @@ Page({
             }
           }
           
-          if(!that.data.shop.name && res.data.shop){
+          if (!that.data.shop.name && res.data.shop.name){
             that.setData({ shop: res.data.shop})
             wx.setNavigationBarTitle({
               title: res.data.shop.name
-            })
-            wx.setNavigationBarColor({
-              frontColor: '#000000',
-              backgroundColor: '#ffffff',
             })
           }
           that.setData({ meals: meals, selectMenuid: cate_id, categorys: categorys})
@@ -100,29 +99,30 @@ Page({
       let selspec = this.data.selspec
       let oldprice = this.parsePrice(selspec.price)
       let price = this.parsePrice(meal.spec[index].price)
-      total.money += price - oldprice
+      
+      total.money = this.parsePrice(total.money - oldprice + price )
       selspec = meal.spec[index]
       this.setData({
         selspec, total
       })
     } else if (data.type == 'ingred') {
       let oldprice = 0
-      let price = 0
       let selingred = []
-      for (let i in meal.ingred){
-        if (meal.ingred[i].sel) oldprice += this.parsePrice(meal.ingred[i].price)
-      }
+      // for (let i in meal.ingred){
+      //   if (meal.ingred[i].sel) oldprice += this.parsePrice(meal.ingred[i].price)
+      // }
       if (!meal.ingred[index].sel){
         meal.ingred[index].sel = true
-        price += this.parsePrice(meal.ingred[index].price)
+        total.money += this.parsePrice(meal.ingred[index].price)
       } else {
         meal.ingred[index].sel = false
-        price = - this.parsePrice(meal.ingred[index].price)
+        total.money -= this.parsePrice(meal.ingred[index].price)
       }
       for (let i in meal.ingred) {
         if (meal.ingred[i].sel) selingred.push(meal.ingred[i])
       }
-      total.money += price
+      total.money = this.parsePrice(total.money)
+      //total.money += price
       this.setData({
         selingred, total, meal
       })
@@ -309,7 +309,6 @@ Page({
             meal.count = 1
             meal.price = selspec.price
             meal.spec_id = { id: selspec.id, name: selspec.name, price: selspec.price }
-            carts.push(meal)
           }else{
             wx.showModal({
               title: '请选择规格',
@@ -333,6 +332,7 @@ Page({
           }
           meal.taste_id = seltaste
         }
+        carts.push(meal)
         this.setData({
           meal: meal,
           flag: true,
@@ -397,6 +397,28 @@ Page({
         meals[i].count = 0
       }
       this.setData({ meals, showModalStatus, cartsLength, cartsprice, carts })
+    },
+    parseStyle() {
+      let config = app.globalData.config.wxmeal_inner_gstyle;
+      let text = this.data.text;
+      ['category_actived','background', 'border_btm', 'title', 'desc', 'price', 'thumb', 'boxer_space', 'minusplus', 'minusplus_icon', 'carticon_bg', 'shopping_cart','buy'].forEach((c) => {
+        let nodestyle = "";
+        let tmpobj = config[c] || {};
+        for (let ky in tmpobj) {
+          let val = tmpobj[ky];
+          if (ky == 'text') { text[c] = val; continue; }
+          if (typeof val == 'number')
+            val = getApp().px2rpx(val);
+          
+          nodestyle += ky + ": " + val + ";";
+        }
+        if (nodestyle.length > 0) {
+          let oldobj = this.data.styles;
+          oldobj[c] = nodestyle;
+          this.setData({ styles: oldobj })
+        }
+      })
+      this.setData({ display: config.display, text: text})
     }
 })
 

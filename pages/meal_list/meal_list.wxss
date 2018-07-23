@@ -35,6 +35,7 @@
 .dish-item-count-text{color:#ccc;font-size:28rpx;text-align:center;width:10px;line-height: 50rpx;}
 .bc_gray{ color: #434343}
 .shopcar{padding-left: 65px;  font-size:39rpx; color:#fff;}
+.shopcarelse{font-size:39rpx; color:#fff;}
 .window{width:80%;background:#ffffff;overflow:hidden;z-index:9000;color:#aaaaaa;text-align:center;margin:auto;padding-left:10px;padding-right:10px;border-radius:16px;position: fixed;top: 45%;left: 50%;-webkit-transform: translateX(-50%) translateY(-50%); }
 .select{display: flex;flex-direction: column;}
 .guige{width:100%;height:27px;line-height:27px;text-align:left;font-size:13px;margin-top:1px;}

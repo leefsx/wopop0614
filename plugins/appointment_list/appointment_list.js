@@ -72,7 +72,6 @@ const appointmentListConfig= {
           this.setData({ styles: oldobj })
         }
       })
-      console.log(this.data.styles.price)
     },
     loadProducts(option, frmdata = {}) {
       let app = getApp(), that = this;
