@@ -46,7 +46,8 @@
 .menu-item{  width: 200rpx;  height: 100rpx;  color: #FFFFFF;  display: flex;  justify-content: center;  align-items: center;  border-bottom: 1px solid #ccc}
 .m-item-icon{  width: 200rpx;  height: 100rpx;  margin: 0 auto;overflow:hidden;}
 .m-item-title{  font-size:31rpx;  height:100rpx;  line-height:100rpx;}
-.left-side{  padding-bottom: 88rpx;  display:flex;  background-color: #FFFFFF;  flex-direction:column;  width: 30%}
+.left-side{ padding-bottom: 88rpx; display:flex; flex-direction:column; width: 30%}
+.left-side .menu-item{background-color: #FFFFFF;}
 .dish-category-title{  font-size: 28rpx;  color: #888;  border-bottom:2rpx solid #ccc;  padding: 20rpx 0;  margin-bottom: 6rpx;}
 
 .dish-item{width: 100%;padding: 16rpx 0;border-bottom: 1px solid #ccc}
@@ -103,7 +104,7 @@
 
 
 
-.right-side{ color: #FFFFFF;  justify-content: center;  align-items: center; background: #f1f1f1}
+.right-side{ color: #FFFFFF;  justify-content: center;  align-items: center; }
 .dish-item{width: 100%;padding: 16rpx 0;border-bottom: 1px solid #ccc;position: relative;background: #ffffff;margin-top: 3px;}
 .bc_red{ color: #ff862c; border-left:6px solid #ff862c; display: block;background: #f1f1f1}
 
