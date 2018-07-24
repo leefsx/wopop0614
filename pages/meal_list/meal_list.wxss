@@ -44,6 +44,7 @@
 .menu-wrp{  overflow:hidden;  display:flex;  background-color:white;  flex-direction:row;border-top:1px solid #ccc}
 .menu-item-wrp{ text-align: center}
 .menu-item{  width: 200rpx;  height: 100rpx;  color: #FFFFFF;  display: flex;  justify-content: center;  align-items: center;  border-bottom: 1px solid #ccc}
+.left-side .menu-item.item_bc_red {background:transparent;}
 .m-item-icon{  width: 200rpx;  height: 100rpx;  margin: 0 auto;overflow:hidden;}
 .m-item-title{  font-size:31rpx;  height:100rpx;  line-height:100rpx;}
 .left-side{ padding-bottom: 88rpx; display:flex; flex-direction:column; width: 30%}
@@ -106,6 +107,6 @@
 
 .right-side{ color: #FFFFFF;  justify-content: center;  align-items: center; }
 .dish-item{width: 100%;padding: 16rpx 0;border-bottom: 1px solid #ccc;position: relative;background: #ffffff;margin-top: 3px;}
-.bc_red{ color: #ff862c; border-left:6px solid #ff862c; display: block;background: #f1f1f1}
+.bc_red{ color: #ff862c; border-left:6px solid #ff862c; display: block;}
 
 

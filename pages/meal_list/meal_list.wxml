@@ -4,7 +4,7 @@
     <!--左侧栏-->
         <scroll-view scroll-y="true" class='left-side' style='height:{{windowHeight-50}}px'>
             <block wx:for="{{categorys}}" wx:key="id">
-                <view class='menu-item' data-id="{{item.id}}" bindtap='selectMenu' style="{{styles.border_btm}}">
+                <view class="menu-item {{selectMenuid==item.id?'item_bc_red':''}}" data-id="{{item.id}}" bindtap='selectMenu' style="{{styles.border_btm}}">
                     <view class='menu-item-wrp'>
                         <view class="m-item-icon">
                           <text class="{{selectMenuid==item.id?'bc_red':'bc_gray'}} m-item-title" style="border-left-{{selectMenuid==item.id?styles.category_actived+styles.category_actived:''}}">{{item.name}}</text>
