@@ -39,14 +39,14 @@
       </view>
       <view class='fx'>
           <view class="fx_title"><text>订单状态：</text></view>  
-          <view class="fx_value"><text>{{order.status_str}}</text></view>
+          <view class="fx_value"><text>{{status_str}}</text></view>
       </view>
     </view>
 
-    <view class='c' wx:if="{{order.status_no==9}}">
+    <view class='c' wx:if="{{status_no==9}}">
         <view class='cicle'>
             <view class='cicle_n'><text>取餐号码</text></view>
-            <view class='cicle_a'><text>{{order.take_number}}</text></view>
+            <view class='cicle_a'><text>{{take_number}}</text></view>
         </view>
     </view>
 
