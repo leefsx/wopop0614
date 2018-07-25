@@ -404,6 +404,7 @@ Page({
     parseStyle() {
       let config = app.globalData.config.wxmeal_inner_gstyle;
       let text = this.data.text;
+      if (config) {
       ['category_actived','background', 'border_btm', 'title', 'desc', 'price', 'thumb', 'boxer_space', 'minusplus', 'minusplus_icon', 'carticon_bg', 'shopping_cart','buy'].forEach((c) => {
         let nodestyle = "";
         let tmpobj = config[c] || {};
@@ -422,6 +423,7 @@ Page({
         }
       })
       this.setData({ display: config.display, text: text})
+      }
     }
 })
 

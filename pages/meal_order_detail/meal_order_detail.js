@@ -16,7 +16,10 @@ Page({
     order: [],
     disass: [],
     getStatusId: '',
-    //shop_n:''
+    now_status:'',
+    status_no:'',
+    status_str:'',
+    take_number:''
   },
 
   /**
@@ -34,8 +37,11 @@ Page({
             that.setData({
               order: res.data.data,
               products:res.data.data.products,
+              status_no:res.data.data.status_no,
+              status_str:res.data.data.status_str
               //shop_n:res.data.data.shop_name
             })
+            that.getStatus(oid);
             // wx.setNavigationBarTitle({
             //   title: that.data.shop_n
             // })
@@ -56,6 +62,32 @@ Page({
         delta: 1
       })
     }
+  },
+  //获取当前订单状态
+  getStatus(oid) {
+    let that = this
+    app.apiRequest('meal', 'order_status', {
+      data: { oid: oid },
+      success: function (res) {
+        if (res.data.result == 'OK') {
+          let now_status_no = res.data.data.status_no || ''
+          let now_status_str = res.data.data.status_str || ''
+          let now_take_number = res.data.data.take_number || ''
+          that.setData({
+            status_no:now_status_no,
+            status_str:now_status_str,
+            take_number:now_take_number
+          })
+          setTimeout(() => {
+            if(now_status_no!='9'){
+              that.getStatus(oid);
+            }
+          }, 3000);
+
+        }
+      }
+    })
+    
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
