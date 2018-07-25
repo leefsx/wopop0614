@@ -35,7 +35,15 @@
                                       <view>
                                           <view class="dish-item-count">
                                               <view class="dish-item-money" wx:if="{{display.price}}">
-                                                  <text wx:if="{{dish.price_type=='0'}}" style="{{styles.price}}">¥{{dish.discount_price>0?dish.discount_price:dish.price}}</text><text style="{{styles.price}}" wx:else>￥{{dish.spec[0].price}}</text>
+												<block wx:if="{{dish.price_type=='0'}}">
+                                                  <text style="{{styles.price}}">¥{{dish.price}}</text>
+												  <text style='font-size：8px;color:#ccc;text-decoration:line-through' wx:if="{{dish.discount_price>0}}">￥{{dish.discount_price}}</text>
+												</block>
+												<block wx:else>
+												  <text style="{{styles.price}}">￥{{dish.spec[0].price}}</text>
+												  <text style='font-size：8px;color:#ccc;text-decoration:line-through' wx:if="{{dish.spec[0].discount_price>0}}">￥{{dish.spec[0].discount_price}}</text>
+												</block>
+                                                  
                                               </view>
                                               <view class="fl">
                                                   <view class="dish-item-tab">
@@ -84,7 +92,7 @@
     </view>
  
 
-     <view class='body' hidden="{{flag}}"> 
+     <view class='body' hidden="{{flag}}" bindtouchmove="handletouchmove"> 
         <view class="window"  animation="{{animation}}">
             <view class='t_title'><text>{{meal.name}}</text></view>
             <view class='select' wx:if="{{specs.length}}" >
