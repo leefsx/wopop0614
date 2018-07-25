@@ -50,6 +50,9 @@ Page({
     that.getMeals(param)
     //--------------------------------------------------------
   },
+  handletouchmove(){
+    this.setData({ flag: true})
+  },
   getMeals(e){
     let that = this
     let shop_id = e.shop_id ? e.shop_id : that.data.shop_id
