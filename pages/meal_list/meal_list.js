@@ -235,6 +235,7 @@ Page({
         carts: carts
       })
       let total = this.data.total
+      total.money = 0
       let specs = []
       if (meal.price_type=='0' && !meal.ingredients && !meal.taste_ids) {
         this.addCart()
