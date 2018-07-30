@@ -95,13 +95,11 @@
     </view>
  
 
-<<<<<<< HEAD
+
         <view class='body'  bindtouchmove="handletouchmove" hidden="{{flag}}"> </view>
         <view class="window"  animation="{{animation}}" hidden="{{flag}}">
-=======
-     <view class='body' hidden="{{flag}}" bindtap="handletouchmove" bindtouchmove="handletouchmove"> 
-        <view class="window"  animation="{{animation}}">
->>>>>>> c787bc47ccd5b8305e1c0f4186e77f2d9883b138
+
+
             <view class='t_title'><text>{{meal.name}}</text></view>
             <view class='select' wx:if="{{specs.length}}" >
               <view class='guige'>规格</view>
