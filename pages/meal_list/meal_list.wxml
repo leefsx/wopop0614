@@ -85,8 +85,8 @@
     </view>
  
 
-     <view class='body' hidden="{{flag}}" bindtouchmove="handletouchmove"> 
-        <view class="window"  animation="{{animation}}">
+        <view class='body'  bindtouchmove="handletouchmove" hidden="{{flag}}"> </view>
+        <view class="window"  animation="{{animation}}" hidden="{{flag}}">
             <view class='t_title'><text>{{meal.name}}</text></view>
             <view class='select' wx:if="{{specs.length}}" >
               <view class='guige'>规格</view>
@@ -113,7 +113,7 @@
                 <button class="select_btn" bindtap="addCart">加入{{text.shopping_cart}}</button>
             </view>
         </view>
-    </view>
+    
  
 
 

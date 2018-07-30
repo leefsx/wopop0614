@@ -37,13 +37,7 @@ Page({
     })
 
     //-------------------------------------------------------
-    this.animation = wx.createAnimation({
-      duration: 200,
-      timingFunction: 'linear',
-      delay: 100,
-      transformOrigin: '50% 50%',
-      opacity: "1"
-    })
+
     let param = {}
     if (shop_id) param.shop_id = shop_id
     that.data.shop_id = shop_id
@@ -243,6 +237,14 @@ Page({
         if (meal.spec) specs = meal.spec
         this.setData({ flag: false, specs: specs, selspec: [], selingred: [], seltaste: [] })
       }
+
+      this.animation = wx.createAnimation({
+        duration: 200,
+        timingFunction: 'linear',
+        delay: 100,
+        transformOrigin: '50% 50%',
+        opacity: "1"
+      })
     },
     //计算购物车数量、总价
     dealCart(){
