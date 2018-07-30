@@ -225,8 +225,10 @@ Page({
           if (meals[i].id == meal.id) meals[i].count += 1
         }
       } else {
-        if (meals[index].count) meals[index].count += 1
-        else meals[index].count = 1
+        if(meal.price_type=='0'){
+          if (meals[index].count) meals[index].count += 1
+          else meals[index].count = 1
+        }
       }
       
       this.setData({
@@ -296,6 +298,7 @@ Page({
     addCart() {
       let meal = this.data.meal
       let carts = this.data.carts
+      let meals = this.data.meals
       //无规格产品加入购物车
       if (meal.price_type == '0' && !meal.ingredients && !meal.taste_ids){
         let incart = false
@@ -339,11 +342,19 @@ Page({
           }
           meal.taste_id = seltaste
         }
+        for (let i in meals) {
+          if (meals[i].id == meal.id){
+            if (meals[i].count) meals[i].count += 1
+            else meals[i].count = 1
+            break;
+          }
+        }
         carts.push(meal)
         this.setData({
           meal: meal,
           flag: true,
-          carts: carts
+          carts: carts,
+          meals: meals
         })
         this.dealCart()
       }
