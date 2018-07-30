@@ -36,12 +36,15 @@
                                           <view class="dish-item-count">
                                               <view class="dish-item-money" wx:if="{{display.price}}">
 												<block wx:if="{{dish.price_type=='0'}}">
-                                                  <text style="{{styles.price}}">¥{{dish.price}}</text>
-												  <text style='font-size：8px;color:#ccc;text-decoration:line-through' wx:if="{{dish.discount_price>0}}">￥{{dish.discount_price}}</text>
+                                                  <text wx:if="{{dish.discount_price>0}}" style="{{styles.price}}">¥{{dish.discount_price}}</text>
+                                                  <text style="{{styles.price}}" wx:else >￥{{dish.price}}</text>
+
+												  <text style='font-size：8px;color:#ccc;text-decoration:line-through' wx:if="{{dish.discount_price>0}}">￥{{dish.price}}</text>
 												</block>
 												<block wx:else>
-												  <text style="{{styles.price}}">￥{{dish.spec[0].price}}</text>
-												  <text style='font-size：8px;color:#ccc;text-decoration:line-through' wx:if="{{dish.spec[0].discount_price>0}}">￥{{dish.spec[0].discount_price}}</text>
+												  <text wx:if="{{dish.spec[0].discount_price>0}}" style="{{styles.price}}">￥{{dish.spec[0].discount_price}}</text>
+                          <text style="{{styles.price}}" wx:else>{{dish.spec[0].price}}</text>
+												  <text style='font-size：8px;color:#ccc;text-decoration:line-through' wx:if="{{dish.spec[0].discount_price>0}}">￥{{dish.spec[0].price}}</text>
 												</block>
                                                   
                                               </view>
