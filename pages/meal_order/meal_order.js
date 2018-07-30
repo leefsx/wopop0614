@@ -11,7 +11,7 @@ Page({
       { t: "下单时间：", r: "" },
     ],
     shop_id: 0,
-    getime_type: '立即取餐',
+    getime_type: '立即取单',
     message: ''
   },
 
@@ -56,7 +56,6 @@ Page({
       data: {orders},
       success: function (res) {
         if (res.data.result == 'OK') {
-          console.log(res.data)
           let resdata = res.data
           let oid = resdata.oid
           if (resdata.paySign){

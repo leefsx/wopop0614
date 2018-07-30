@@ -29,14 +29,24 @@
                                               <text style="{{styles.title}}">{{dish.name}}</text>
                                           </view>
                                           <view  class="dish-item-sales" wx:if="{{display.desc}}">
-                                              <text style="{{styles.desc}}">月销量{{dish.sales}}</text>
+                                              <text style="{{styles.desc}}">{{dish.description}}</text>
                                           </view>
                                       </view>
                                       <view>
                                           <view class="dish-item-count">
                                               <view class="dish-item-money" wx:if="{{display.price}}">
-                                                  <text wx:if="{{!dish.spec}}" style="{{styles.price}}">¥{{dish.discount_price>0?dish.discount_price:dish.price}}</text><text style="{{styles.price}}" wx:else>￥{{dish.spec[0].price}}</text>
-                                                  <text style='font-size：8px;color:#ccc;text-decoration:line-through'>￥20</text>
+												<block wx:if="{{dish.price_type=='0'}}">
+                                                  <text wx:if="{{dish.discount_price>0}}" style="{{styles.price}}">¥{{dish.discount_price}}</text>
+                                                  <text style="{{styles.price}}" wx:else >￥{{dish.price}}</text>
+
+												  <text style='font-size：8px;color:#ccc;text-decoration:line-through' wx:if="{{dish.discount_price>0}}">￥{{dish.price}}</text>
+												</block>
+												<block wx:else>
+												  <text wx:if="{{dish.spec[0].discount_price>0}}" style="{{styles.price}}">￥{{dish.spec[0].discount_price}}</text>
+                          <text style="{{styles.price}}" wx:else>{{dish.spec[0].price}}</text>
+												  <text style='font-size：8px;color:#ccc;text-decoration:line-through' wx:if="{{dish.spec[0].discount_price>0}}">￥{{dish.spec[0].price}}</text>
+												</block>
+                                                  
                                               </view>
                                               <view class="fl">
                                                   <view class="dish-item-tab">
@@ -85,32 +95,37 @@
     </view>
  
 
+<<<<<<< HEAD
         <view class='body'  bindtouchmove="handletouchmove" hidden="{{flag}}"> </view>
         <view class="window"  animation="{{animation}}" hidden="{{flag}}">
+=======
+     <view class='body' hidden="{{flag}}" bindtap="handletouchmove" bindtouchmove="handletouchmove"> 
+        <view class="window"  animation="{{animation}}">
+>>>>>>> c787bc47ccd5b8305e1c0f4186e77f2d9883b138
             <view class='t_title'><text>{{meal.name}}</text></view>
             <view class='select' wx:if="{{specs.length}}" >
               <view class='guige'>规格</view>
               <view class='foods'>
-                  <text class="b1 {{selspec.id==item.id?'b2':''}}" bindtap="tapAttr" wx:for="{{specs}}" data-index="{{index}}" data-type="spec" wx:key="{{item}}">{{item.name}}</text>
+                  <text class="b1 {{selspec.id==item.id?'b2':''}}" catchtap="tapAttr" wx:for="{{specs}}" data-index="{{index}}" data-type="spec" wx:key="{{item}}" style="{{selspec.id==item.id?'color:#fff;background-'+styles.category_actived:''}}">{{item.name}}</text>
               </view>
             </view>
 
             <view class='select' wx:if="{{meal.ingred}}" >
               <view class='guige'>加料</view>
               <view class='foods'>
-                  <text class="b1 {{item.sel==true?'b2':''}}" bindtap="tapAttr" wx:for="{{meal.ingred}}" data-index="{{index}}" data-type="ingred" wx:key="{{item}}">{{item.name}}</text>
+                  <text class="b1 {{item.sel==true?'b2':''}}" catchtap="tapAttr" wx:for="{{meal.ingred}}" data-index="{{index}}" data-type="ingred" wx:key="{{item}}" style="{{item.sel==true?'color:#fff;background-'+styles.category_actived:''}}">{{item.name}}</text>
               </view>
             </view>
 
             <view class='select' wx:if="{{meal.taste}}" wx:for="{{meal.taste}}" wx:key="{{item}}" wx:for-item="item" wx:for-index="index">
               <view class='guige'>{{item.name}}</view>
               <view class='foods'>
-                  <text class="b1 {{item.sel==item0?'b2':''}}" bindtap="tapAttr" wx:for="{{item.subname}}" data-name="{{item0}}" data-index="{{index}}" data-tindex="{{index0}}" data-type="taste" wx:key="{{item0}}" wx:for-item="item0" wx:for-index="index0">{{item0}}</text>
+                  <text class="b1 {{item.sel==item0?'b2':''}}" catchtap="tapAttr" wx:for="{{item.subname}}" data-name="{{item0}}" data-index="{{index}}" data-tindex="{{index0}}" data-type="taste" wx:key="{{item0}}" wx:for-item="item0" wx:for-index="index0" style="{{item.sel==item0?'color:#fff;background-'+styles.category_actived:''}}">{{item0}}</text>
               </view>
             </view>
             <view class='footer-btn'>
                 <text class="select_txt">总价:￥{{total.money}}</text>
-                <button class="select_btn" bindtap="addCart">加入{{text.shopping_cart}}</button>
+                <button class="select_btn" catchtap="addCart" style="background-{{styles.category_actived}}">加入{{text.shopping_cart}}</button>
             </view>
         </view>
     

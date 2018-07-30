@@ -8,8 +8,8 @@ Page({
 		gettime: 'now',
 		gettype: '0',
 		gettypes: [
-			{id: '0',checked: false,disabled: true,title: '现在，支付成功后在店内取餐'},
-			{id: '1',checked: false,disabled: true,title: '稍晚，预约稍晚时间到店取餐'}
+			{id: '0',checked: false,disabled: true,title: '现在，支付成功后在店内取单'},
+			{id: '1',checked: false,disabled: true,title: '稍晚，预约稍晚时间到店取单'}
 		],
 		stime: '00:00',
 		etime: '23:00',
@@ -104,7 +104,7 @@ Page({
 	},
 	
 	_initMealTime (idx){
-		// for '取餐时间'
+		// for '取单时间'
 		let curshop = this.data.shops[idx],
 		_type = curshop.getime_type || '';
 		if (_type.length == 0) return false;
@@ -130,7 +130,7 @@ Page({
 		[stime, etime] = (open_time || '').split('-');
 		
 		switch (gettype) {
-			case '0': /*现在取餐*/
+			case '0': /*现在取单*/
 				this.setData({gettime: 'now'});
 				if (!(stime && etime)) return true;
 				const d = new Date();
@@ -145,10 +145,10 @@ Page({
 					return false
 				} else return true
 				break;
-			case '1': /*稍晚取餐*/
+			case '1': /*稍晚取单*/
 				if (/^\d{2}:\d{2}$/.test(this.data.gettime)) return true;
 				wx.showModal({
-					title: '请选择取餐时间',
+					title: '请选择取单时间',
 					content: '',showCancel: false
 				});
 				return false
@@ -201,7 +201,7 @@ Page({
 		sid = e.currentTarget.dataset.sid,
 		curshop = shops.find(c => c.id == sid);
 		
-		// 检测'取餐时间'
+		// 检测'取单时间'
 		let chkres = this._checkMealTime(curshop.opening_hours);
 		if (chkres == false) return chkres;
 		// 保存'临时数据'

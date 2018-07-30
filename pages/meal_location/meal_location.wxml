@@ -36,7 +36,7 @@
 					<view class='detail_txt'>
 						<text>{{item.city_id + item.dist_id + item.detailed_addr}}</text>
 					</view>
-					<view class='detail_sty'><text>取餐时间:</text></view>
+					<view class='detail_sty'><text>取单时间:</text></view>
 					<view>
 						<radio-group class="radio-group" bindchange="resetGetTime" data-sid="{{item.id}}">
 							<label wx:for="{{gettypes}}" wx:for-item="type" wx:key="{{type.id}}">
@@ -48,7 +48,7 @@
 						
 						<view class="section {{showtime ? 'show' : 'hide'}}">
 							<picker mode="time" value="{{stime}}" start="{{stime}}" end="{{etime}}" bindchange="resetGetTimeVal">
-								<view class="picker">请选择取餐时间: 
+								<view class="picker">请选择取单时间: 
 								<block wx:if="{{gettime}}">{{gettime}}</block>
 								<block wx:else>{{stime}} - {{etime}}</block></view>
 							</picker>

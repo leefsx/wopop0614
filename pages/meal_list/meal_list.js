@@ -110,10 +110,10 @@ Page({
       // }
       if (!meal.ingred[index].sel){
         meal.ingred[index].sel = true
-        total.money += this.parsePrice(meal.ingred[index].price)
+        total.money = this.parsePrice(total.money) + this.parsePrice(meal.ingred[index].price)
       } else {
         meal.ingred[index].sel = false
-        total.money -= this.parsePrice(meal.ingred[index].price)
+        total.money = this.parsePrice(total.money) - this.parsePrice(meal.ingred[index].price)
       }
       for (let i in meal.ingred) {
         if (meal.ingred[i].sel) selingred.push(meal.ingred[i])
@@ -229,13 +229,17 @@ Page({
         carts: carts
       })
       let total = this.data.total
+      total.money = 0
       let specs = []
-      if (!meal.spec_ids && !meal.ingredients && !meal.taste_ids) {
+      if (meal.price_type=='0' && !meal.ingredients && !meal.taste_ids) {
         this.addCart()
         this.dealCart()
       }else{
-        if (meal.spec) specs = meal.spec
-        this.setData({ flag: false, specs: specs, selspec: [], selingred: [], seltaste: [] })
+        if (meal.price_type == '1') specs = meal.spec
+        else{
+          total.money = meal.discount_price > 0 ? meal.discount_price : meal.price
+        }
+        this.setData({ flag: false, specs: specs, selspec: [], selingred: [], seltaste: [], total: total})
       }
 
       this.animation = wx.createAnimation({
@@ -295,7 +299,7 @@ Page({
       let meal = this.data.meal
       let carts = this.data.carts
       //无规格产品加入购物车
-      if (!meal.spec_ids && !meal.ingredients && !meal.taste_ids){
+      if (meal.price_type == '0' && !meal.ingredients && !meal.taste_ids){
         let incart = false
         for (let i in carts) {
           if (carts[i].id == meal.id){
@@ -308,7 +312,7 @@ Page({
         }
       }else{
         //有规格产品加入购物车
-        if (meal.spec_ids){
+        if (meal.price_type == '1'){
           let selspec = this.data.selspec
           if (selspec.id) {
             meal.count = 1
@@ -360,7 +364,7 @@ Page({
       }
       if (type == 'cart') meal = this.data.carts[index]
       // 这个弹出框只能针对有规格商品的删减提示，不能点减号删减只能在购物车中删减
-      if (meal.spec && type!='cart'){
+      if (meal.price_type == '1' && type!='cart'){
         wx.showModal({
           title: '提示',
           content: '含有规格的商品只能在购物车里删减',
