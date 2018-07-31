@@ -4,7 +4,7 @@
         <text class="shop_addr">{{order.detailed_addr?order.detailed_addr:''}}</text>
     </view>
     <view class='pro_list'>
-        <view class='detail' wx:for="{{products}}" wx:key="">
+        <view class='detail'  wx:key="">
             <view class='detail_img'>
             <image mode='aspectFit' src="{{item.feature_img}}"></image>
             </view>
