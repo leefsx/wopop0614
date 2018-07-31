@@ -96,10 +96,8 @@
  
 
 
-        <view class='body'  bindtouchmove="handletouchmove" hidden="{{flag}}"> </view>
+        <view class='body' bindtap="handletouchmove" hidden="{{flag}}"> </view>
         <view class="window"  animation="{{animation}}" hidden="{{flag}}">
-
-
             <view class='t_title'><text>{{meal.name}}</text></view>
             <view class='select' wx:if="{{specs.length}}" >
               <view class='guige'>规格</view>
@@ -115,7 +113,7 @@
               </view>
             </view>
 
-            <view class='select' wx:if="{{meal.taste}}" wx:for="{{meal.taste}}" wx:key="{{item}}" wx:for-item="item" wx:for-index="index">
+            <view class='select' wx:if="{{meal.taste.length}}" wx:for="{{meal.taste}}" wx:key="{{item}}" wx:for-item="item" wx:for-index="index">
               <view class='guige'>{{item.name}}</view>
               <view class='foods'>
                   <text class="b1 {{item.sel==item0?'b2':''}}" catchtap="tapAttr" wx:for="{{item.subname}}" data-name="{{item0}}" data-index="{{index}}" data-tindex="{{index0}}" data-type="taste" wx:key="{{item0}}" wx:for-item="item0" wx:for-index="index0" style="{{item.sel==item0?'color:#fff;background-'+styles.category_actived:''}}">{{item0}}</text>
