@@ -1,12 +1,12 @@
 {
   "pages":[
-            "pages/meal_list/meal_list",
-        "pages/meal_location/meal_location",
+    "pages/meal_order_detail/meal_order_detail",
+    "pages/meal_list/meal_list",
+    "pages/meal_location/meal_location",
     "pages/ucenter/ucenter",
     "pages/meal_order_list/meal_order_list",
     "pages/meal_phoneauth/meal_phoneauth",
     "pages/meal_order/meal_order",
-    "pages/meal_order_detail/meal_order_detail",
     "pages/page6/page6",
     "pages/mydis_sub/mydis_sub",
     "pages/mydis_record/mydis_record",
