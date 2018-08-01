@@ -9,6 +9,10 @@
 .lan{width: 95%;margin-top: 15px;margin: 0 auto;margin-bottom: 25px}
 .lan view{padding-top:5px;padding-bottom: 5px; height: 50px;line-height: 50px;width: 100%}
 .fx{
+
+
+
+
     display: flex;text-align: left;border-bottom: 1px solid #ccc
 }
 

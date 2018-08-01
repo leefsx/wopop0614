@@ -12,13 +12,22 @@ Page({
     ],
     shop_id: 0,
     getime_type: '立即取单',
-    message: ''
+    message: '',
+    Wheight:0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          Wheight: res.windowHeight
+        })
+      }
+    }),
     wx.setNavigationBarTitle({
       title: '提交订单'
     })
@@ -30,7 +39,6 @@ Page({
     let shop_id = options.shop_id
     let detail = this.data.detail
     let param = { shop_id }
-    let that = this
     that.setData({ getime_type })
     let date = new Date()
     let year = date.getFullYear()

@@ -1,5 +1,6 @@
 <view>
-    <!-- <view class='title'>提交订单</view> -->
+<scroll-view scroll-y="true" style="height:{{Wheight-50}}px">
+    <!-- <view class='title'  >提交订单</view> -->
     <view class='detail' wx:for="{{carts}}" wx:key="{{item}}">
         <view class='detail_img'>
           <image mode='aspectFit' src="{{item.feature_img}}"></image>
@@ -19,6 +20,7 @@
           <text class='de3'>￥{{item.price}}</text>
         </view>
     </view>
+    
     
     <view class='count'>
         <view class='count_money'>总价:<text>￥{{cartsprice}}</text></view>
@@ -41,9 +43,9 @@
       </view>
     </view>
 
+</scroll-view>
     <view class='footer'>
       <view class='footer-l'><text>实付款:{{cartsprice}}</text></view>
       <view class='footer-r'><navigator bindtap="submitOrder">提交订单</navigator></view>
     </view>
-
 </view>
