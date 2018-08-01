@@ -56,6 +56,7 @@ Page({
       data: {orders},
       success: function (res) {
         if (res.data.result == 'OK') {
+          app.globalData.mealCarts = []
           let resdata = res.data
           let oid = resdata.oid
           if (resdata.paySign){
