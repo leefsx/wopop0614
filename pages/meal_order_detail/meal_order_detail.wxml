@@ -11,7 +11,7 @@
             <view class='detail_txt'>
             <text class='de1'>{{item.product_name}}</text>
             <text class='de2'>{{item.product_attr?item.product_attr:''}}</text>
-            <text class='de3'>￥{{item.total_price}}X{{item.amount}}</text>
+            <text class='de3'>￥{{item.price/item.amount}}X{{item.amount}}</text>
             </view>
         </view>
         <view class='count_money'>总价:<text>￥{{order.total_price}}</text></view>

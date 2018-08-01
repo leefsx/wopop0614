@@ -40,12 +40,13 @@ Page({
     detail[1].r = nowdate
     let carts = app.globalData.mealCarts
     for (let i in carts){
-      if (carts[i].ingred_id){
+      if (carts[i].ingred_id && carts[i].ingred_id.length){
         let ingred_id = carts[i].ingred_id;
         for (let j in ingred_id){
           let price = carts[i].price
           if (ingred_id[j].sel) {
-            price = this.parsePrice(carts[i].price) + this.parsePrice(ingred_id[j].price)
+            let iprice = carts[i].discount_price > 0 ? carts[i].discount_price : carts[i].price
+            price = this.parsePrice(iprice) + this.parsePrice(ingred_id[j].price)
           }
           carts[i].total_price = this.parsePrice(price)
         }
@@ -93,8 +94,12 @@ Page({
                 wx.navigateTo({ url: '../meal_order_detail/meal_order_detail?oid=' + oid })
               },
               fail(res) {
+                let err = res.errMsg
+                if (err == 'requestPayment:fail cancel'){
+                  err = '用户取消'
+                }
                 wx.showModal({
-                  title: res.errMsg,
+                  title: err,
                   content: '', showCancel: false,
                   //complete() {wx.navigateTo({url: '../meal_order_list/meal_order_list'})}
                 })

@@ -501,14 +501,15 @@ Page({
     },
     onShow(){
       let carts = app.globalData.mealCarts || []
-      if (!carts) {
+      if (!carts.length) {
         let total = this.data.total
         let meals = this.data.meals
-        total.money = 0
+        let cartsLength = 0
+        let cartsprice = 0
         for (let i in meals){
           if (meals[i].count > 0) meals[i].count = 0
         }
-        this.setData({ carts, total, meals })
+        this.setData({ carts, cartsLength, cartsprice, meals })
       }
     },
     //清空购物车

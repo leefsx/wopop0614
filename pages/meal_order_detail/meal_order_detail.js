@@ -19,7 +19,8 @@ Page({
     now_status:'',
     status_no:'',
     status_str:'',
-    take_number:''
+    take_number:'',
+    status: ''
   },
 
   /**
@@ -78,12 +79,12 @@ Page({
             status_str:now_status_str,
             take_number:now_take_number
           })
-          setTimeout(() => {
+          let status = setTimeout(() => {
             if(now_status_no!='9'){
               that.getStatus(oid);
             }
           }, 3000);
-
+          that.setData({ status })
         }
       }
     })
@@ -107,14 +108,14 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
-  
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-  
+    let status = this.data.status
+    clearTimeout(status)
   },
 
   /**
