@@ -11,7 +11,7 @@
 .lan view{padding-top:5px;padding-bottom: 5px; height: 50px;line-height: 50px;width: 100%}
 .fx{display: flex;text-align: left;border-bottom: 1px solid #ccc}
 .lan view text{ overflow: hidden;text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;}
-.footer{display: flex;width: 100%;height: 50px;line-height: 50px;justify-content: space-around;position: fixed;bottom: 0;z-index: 9999999999999999999}
+.footer{display: flex;width: 100%;height: 50px;line-height: 50px;justify-content: space-around;position: fixed;bottom: 0;}
 .footer-l{flex: 5;background: #231b19;color: #ff862c;padding-left: 20px;}
 .footer-r{flex: 3;background: #ff862c;color: #ffffff;text-align: center}
 .count{margin-top:18px;padding-right:13px;}
