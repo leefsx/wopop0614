@@ -320,6 +320,8 @@ Page({
       let cartsprice = this.data.cartsprice
       app.globalData.mealCarts = mealCarts
       let shop_id = this.data.shop_id
+      let showModalStatus = false
+      this.setData({ showModalStatus })
       wx.navigateTo({
         url: '../meal_order/meal_order?cartsprice=' + cartsprice + '&shop_id=' + shop_id,
       })
@@ -391,6 +393,12 @@ Page({
                 }
                 if (carttaste) carttastestr = carttaste.sort().join('')
               }
+              if (!mealspec) mealspec = ''
+              if (!mealingred) mealingred = ''
+              if (!mealtaste) mealtaste = ''
+              if (!cartspec) cartspec = ''
+              if (!cartingredstr) cartingredstr = ''
+              if (!carttastestr) carttastestr = ''
               if (mealspec == cartspec && mealingred == cartingredstr && mealtaste == carttastestr){
                 carts[i].count += 1
                 let meal_id = carts[i].id
@@ -404,7 +412,7 @@ Page({
             } else continue;
           }
         }
-        
+
         //有规格产品加入购物车
         if (meal.price_type == '1'){
           let selspec = this.data.selspec
@@ -424,7 +432,7 @@ Page({
         if (meal.ingredients){
           let selingred = this.data.selingred
           meal.ingred_id = selingred
-          if (!meal.count) meal.count = 1
+          meal.count = 1
         }
         if (meal.taste_ids){
           let seltaste = []
