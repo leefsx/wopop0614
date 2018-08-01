@@ -60,8 +60,18 @@ Page({
         if (res.data.result == 'OK') {
           let meals = res.data.data
           let categorys = res.data.categorys
+          if (!cate_id&&categorys.length>0) {
+            cate_id = categorys[0].id
+          }
           let selectMenuid = cate_id
           let carts = that.data.carts
+          let cateMeals = [];
+          for(let t in meals){
+            if (meals[t].category_id == selectMenuid){
+              cateMeals.push(meals[t])
+            }
+          }
+          meals = cateMeals;
           for (let i in meals){
             for(let j in carts){
               if (parseInt(meals[i].id) == parseInt(carts[j].id)) {
@@ -69,7 +79,6 @@ Page({
               }
             }
           }
-          
           if (!that.data.shop.name && res.data.shop.name){
             that.setData({ shop: res.data.shop})
             wx.setNavigationBarTitle({
@@ -218,8 +227,15 @@ Page({
         for (let i in meals) {
           if (meals[i].id == meal.id) meals[i].count += 1
         }
+        carts[index].count += 1
+        this.setData({
+          meals: meals,
+          carts: carts
+        })
+        this.dealCart();
+        return false;
       } else {
-        if(meal.price_type=='0'){
+        if (meal.price_type == '0' && !meal.taste_ids && !meal.ingredients){
           if (meals[index].count) meals[index].count += 1
           else meals[index].count = 1
         }
@@ -256,34 +272,46 @@ Page({
     dealCart(){
       let carts = this.data.carts
       let meal = this.data.meal
+      let meals = this.data.meals
       let nocart = true
       let cartsLength = 0
       let cartsprice = 0
       for (let i in carts) {
-        if (carts[i].count > 1) {
-          cartsLength += parseInt(carts[i].count)
-          //规格和餐盒计算
+        if (carts[i].id){
+          let count = carts[i].count ? parseInt(carts[i].count) : 1
+          cartsLength += count
           let price = this.parsePrice(carts[i].discount_price > 0 ? carts[i].discount_price : carts[i].price) + this.parsePrice(carts[i].packing_fee)
-          cartsprice += price * parseInt(carts[i].count)
-        } else if (carts[i].id){
-          cartsLength += 1
-          let price = this.parsePrice(carts[i].discount_price > 0 ? carts[i].discount_price : carts[i].price) + this.parsePrice(carts[i].packing_fee)
+          price = price*count
           if (carts[i].ingred_id) {
             //加料计算
             for(let k in carts[i].ingred_id){
-              price += this.parsePrice(carts[i].ingred_id[k].price)
+              price += this.parsePrice(carts[i].ingred_id[k].price) * count
             }
           }
           cartsprice += price
         }
       }
+      if (carts.length == 0){
+        for(let i in meals){
+          if (meals[i].count > 0) meals[i].count = 0
+        }
+      }
       this.setData({
         cartsLength: cartsLength, 
-        cartsprice: this.parsePrice(cartsprice)
+        cartsprice: this.parsePrice(cartsprice),
+        meals: meals
       })
     },
     submit(){
       let mealCarts = this.data.carts
+      if (mealCarts.length<=0){
+        wx.showModal({
+          title: '购物车不能为空',
+          content: '',
+          showCancel: false
+        })
+        return false;
+      }
       for (let i in mealCarts){
         if (mealCarts[i].spec) mealCarts[i].spec = ''
         if (mealCarts[i].ingred) mealCarts[i].ingred = ''
@@ -292,6 +320,8 @@ Page({
       let cartsprice = this.data.cartsprice
       app.globalData.mealCarts = mealCarts
       let shop_id = this.data.shop_id
+      let showModalStatus = false
+      this.setData({ showModalStatus })
       wx.navigateTo({
         url: '../meal_order/meal_order?cartsprice=' + cartsprice + '&shop_id=' + shop_id,
       })
@@ -311,9 +341,78 @@ Page({
           }
         }
         if (!incart){
+          if (!meal.count) meal.count = 1
           carts.push(meal)
         }
       }else{
+        let mealspec = ''
+        let mealingred = []
+        let mealtaste = []
+        if (this.data.selspec) mealspec = this.data.selspec.id
+        if (this.data.selingred){
+          let selingred = this.data.selingred
+          for (let i in selingred){
+            if (selingred[i].id) {
+              mealingred.push(selingred[i].id)
+            }
+          }
+          if (mealingred) mealingred = mealingred.sort().join('');
+        }
+        if (meal.taste){
+          let taste = meal.taste
+          for (let i in taste){
+            if (taste[i].sel) mealtaste.push(taste[i].sel)
+          }
+          if (mealtaste) mealtaste = mealtaste.sort().join('');
+        }
+        if(this.data.carts){
+          let carts = this.data.carts
+          let cartspec = ''
+          let cartingredstr = ''
+          let carttastestr = ''
+          for(let i in carts){
+            if(carts[i].id==meal.id){
+              let cartingred = []
+              let carttaste = []
+              if (carts[i].spec_id) cartspec = carts[i].spec_id.id
+              if (carts[i].ingred_id) {
+                let ingred_id = carts[i].ingred_id
+                for (let i in ingred_id) {
+                  if (ingred_id[i].id) {
+                    cartingred.push(ingred_id[i].id)
+                  }
+                }
+                if (cartingred) cartingredstr = cartingred.sort().join('')
+              }
+              if (carts[i].taste_id){
+                let taste_id = carts[i].taste_id
+                for (let i in taste_id){
+                  if (taste_id[i].sel) {
+                    carttaste.push(taste_id[i].sel)
+                  }
+                }
+                if (carttaste) carttastestr = carttaste.sort().join('')
+              }
+              if (!mealspec) mealspec = ''
+              if (!mealingred) mealingred = ''
+              if (!mealtaste) mealtaste = ''
+              if (!cartspec) cartspec = ''
+              if (!cartingredstr) cartingredstr = ''
+              if (!carttastestr) carttastestr = ''
+              if (mealspec == cartspec && mealingred == cartingredstr && mealtaste == carttastestr){
+                carts[i].count += 1
+                let meal_id = carts[i].id
+                for (let i in meals) {
+                  if (meals[i].id == meal_id) meals[i].count += 1
+                }
+                this.setData({ carts: carts, flag: true, meals: meals })
+                this.dealCart()
+                return false;
+              }
+            } else continue;
+          }
+        }
+
         //有规格产品加入购物车
         if (meal.price_type == '1'){
           let selspec = this.data.selspec
@@ -333,6 +432,7 @@ Page({
         if (meal.ingredients){
           let selingred = this.data.selingred
           meal.ingred_id = selingred
+          meal.count = 1
         }
         if (meal.taste_ids){
           let seltaste = []
@@ -343,6 +443,7 @@ Page({
             }
           }
           meal.taste_id = seltaste
+          if (!meal.count) meal.count = 1
         }
         for (let i in meals) {
           if (meals[i].id == meal.id){
@@ -404,6 +505,19 @@ Page({
         }
         this.setData({ meals, carts })
         this.dealCart()
+      }
+    },
+    onShow(){
+      let carts = app.globalData.mealCarts || []
+      if (!carts.length) {
+        let total = this.data.total
+        let meals = this.data.meals
+        let cartsLength = 0
+        let cartsprice = 0
+        for (let i in meals){
+          if (meals[i].count > 0) meals[i].count = 0
+        }
+        this.setData({ carts, cartsLength, cartsprice, meals })
       }
     },
     //清空购物车

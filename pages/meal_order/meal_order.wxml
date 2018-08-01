@@ -9,7 +9,7 @@
           <text class='de1'>{{item.name}}</text>
           <text class='de2'>
           <block wx:if="{{item.spec_id}}"> <text>规格:{{item.spec_id.name}}</text> </block>
-          <block wx:if="{{item.ingred_id}}">
+          <block wx:if="{{item.ingred_id.length}}">
             <text> 加料:</text>
             <text wx:for="{{item.ingred_id}}" wx:key="index" wx:for-item="item1">{{item1.name+'￥'+item1.price}} </text>
           </block>
@@ -17,7 +17,7 @@
             <text wx:for="{{item.taste_id}}" wx:key="index" wx:for-item="item2">{{item2.name+':'+item2.sel}} </text>
           </block>
           </text>
-          <text class='de3'>￥{{item.price}}</text>
+          <text class='de3'>￥{{item.total_price}} X{{item.count}}</text>
         </view>
     </view>
     

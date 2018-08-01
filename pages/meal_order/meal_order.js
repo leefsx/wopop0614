@@ -47,7 +47,30 @@ Page({
     let nowdate = year + '-' + month + '-' + day
     detail[1].r = nowdate
     let carts = app.globalData.mealCarts
+    for (let i in carts){
+      if (carts[i].ingred_id && carts[i].ingred_id.length){
+        let ingred_id = carts[i].ingred_id;
+        for (let j in ingred_id){
+          let price = carts[i].price
+          if (ingred_id[j].sel) {
+            let iprice = carts[i].discount_price > 0 ? carts[i].discount_price : carts[i].price
+            price = this.parsePrice(iprice) + this.parsePrice(ingred_id[j].price)
+          }
+          carts[i].total_price = this.parsePrice(price)
+        }
+      }else{
+        carts[i].total_price = carts[i].discount_price > 0 ? carts[i].discount_price : carts[i].price
+      }
+    }
     this.setData({ cartsprice, carts, detail, shop_id})
+  },
+  parsePrice(val) {
+    var floatval = parseFloat(val);
+    floatval += 0.0000001;
+    if (floatval) {
+      var theval = parseFloat(floatval.toFixed(2));
+      return theval;
+    } else return 0;
   },
   submitOrder(e){
     let shop_id = this.data.shop_id
@@ -64,6 +87,7 @@ Page({
       data: {orders},
       success: function (res) {
         if (res.data.result == 'OK') {
+          app.globalData.mealCarts = []
           let resdata = res.data
           let oid = resdata.oid
           if (resdata.paySign){
@@ -78,8 +102,12 @@ Page({
                 wx.navigateTo({ url: '../meal_order_detail/meal_order_detail?oid=' + oid })
               },
               fail(res) {
+                let err = res.errMsg
+                if (err == 'requestPayment:fail cancel'){
+                  err = '用户取消'
+                }
                 wx.showModal({
-                  title: res.errMsg,
+                  title: err,
                   content: '', showCancel: false,
                   //complete() {wx.navigateTo({url: '../meal_order_list/meal_order_list'})}
                 })
