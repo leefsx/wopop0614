@@ -4,14 +4,14 @@
         <text class="shop_addr">{{order.detailed_addr?order.detailed_addr:''}}</text>
     </view>
     <view class='pro_list'>
-        <view class='detail'  wx:key="">
+        <view class='detail' wx:for="{{products}}" wx:key="index">
             <view class='detail_img'>
             <image mode='aspectFit' src="{{item.feature_img}}"></image>
             </view>
             <view class='detail_txt'>
             <text class='de1'>{{item.product_name}}</text>
             <text class='de2'>{{item.product_attr?item.product_attr:''}}</text>
-            <text class='de3'>￥{{item.price}}X{{item.amount}}</text>
+            <text class='de3'>￥{{item.total_price}}X{{item.amount}}</text>
             </view>
         </view>
         <view class='count_money'>总价:<text>￥{{order.total_price}}</text></view>

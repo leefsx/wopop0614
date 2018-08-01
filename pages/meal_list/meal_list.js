@@ -235,7 +235,7 @@ Page({
         this.dealCart();
         return false;
       } else {
-        if (meal.price_type == '0' && !meal.taste_ids && !meal.spec_ids && !meal.ingredients){
+        if (meal.price_type == '0' && !meal.taste_ids && !meal.ingredients){
           if (meals[index].count) meals[index].count += 1
           else meals[index].count = 1
         }
@@ -272,6 +272,7 @@ Page({
     dealCart(){
       let carts = this.data.carts
       let meal = this.data.meal
+      let meals = this.data.meals
       let nocart = true
       let cartsLength = 0
       let cartsprice = 0
@@ -290,9 +291,15 @@ Page({
           cartsprice += price
         }
       }
+      if (carts.length == 0){
+        for(let i in meals){
+          if (meals[i].count > 0) meals[i].count = 0
+        }
+      }
       this.setData({
         cartsLength: cartsLength, 
-        cartsprice: this.parsePrice(cartsprice)
+        cartsprice: this.parsePrice(cartsprice),
+        meals: meals
       })
     },
     submit(){
@@ -313,7 +320,6 @@ Page({
       let cartsprice = this.data.cartsprice
       app.globalData.mealCarts = mealCarts
       let shop_id = this.data.shop_id
-      this.truncateCarts()
       wx.navigateTo({
         url: '../meal_order/meal_order?cartsprice=' + cartsprice + '&shop_id=' + shop_id,
       })
@@ -387,7 +393,11 @@ Page({
               }
               if (mealspec == cartspec && mealingred == cartingredstr && mealtaste == carttastestr){
                 carts[i].count += 1
-                this.setData({ carts: carts, flag: true })
+                let meal_id = carts[i].id
+                for (let i in meals) {
+                  if (meals[i].id == meal_id) meals[i].count += 1
+                }
+                this.setData({ carts: carts, flag: true, meals: meals })
                 this.dealCart()
                 return false;
               }
@@ -487,6 +497,18 @@ Page({
         }
         this.setData({ meals, carts })
         this.dealCart()
+      }
+    },
+    onShow(){
+      let carts = app.globalData.mealCarts || []
+      if (!carts) {
+        let total = this.data.total
+        let meals = this.data.meals
+        total.money = 0
+        for (let i in meals){
+          if (meals[i].count > 0) meals[i].count = 0
+        }
+        this.setData({ carts, total, meals })
       }
     },
     //清空购物车

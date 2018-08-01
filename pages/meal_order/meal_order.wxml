@@ -16,7 +16,7 @@
             <text wx:for="{{item.taste_id}}" wx:key="index" wx:for-item="item2">{{item2.name+':'+item2.sel}} </text>
           </block>
           </text>
-          <text class='de3'>￥{{item.price}} X{{item.count}}</text>
+          <text class='de3'>￥{{item.total_price}} X{{item.count}}</text>
         </view>
     </view>
     

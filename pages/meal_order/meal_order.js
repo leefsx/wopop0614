@@ -39,7 +39,29 @@ Page({
     let nowdate = year + '-' + month + '-' + day
     detail[1].r = nowdate
     let carts = app.globalData.mealCarts
+    for (let i in carts){
+      if (carts[i].ingred_id){
+        let ingred_id = carts[i].ingred_id;
+        for (let j in ingred_id){
+          let price = carts[i].price
+          if (ingred_id[j].sel) {
+            price = this.parsePrice(carts[i].price) + this.parsePrice(ingred_id[j].price)
+          }
+          carts[i].total_price = this.parsePrice(price)
+        }
+      }else{
+        carts[i].total_price = carts[i].discount_price > 0 ? carts[i].discount_price : carts[i].price
+      }
+    }
     this.setData({ cartsprice, carts, detail, shop_id})
+  },
+  parsePrice(val) {
+    var floatval = parseFloat(val);
+    floatval += 0.0000001;
+    if (floatval) {
+      var theval = parseFloat(floatval.toFixed(2));
+      return theval;
+    } else return 0;
   },
   submitOrder(e){
     let shop_id = this.data.shop_id
